@@ -13,6 +13,20 @@ if ($conn->connect_error) {
 }
 echo "Connected successfully";
 
+$sql = "SELECT catId, nomCat FROM `p1905532`.`Categorie`";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  echo "<table><tr><th>catID</th><th>Name Categorie</th></tr>";
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo "<tr><td>".$row["catId"]."</td><td>".$row["nomCat"]."</td></tr>";
+  }
+  echo "</table>";
+} else {
+  echo "0 results";
+}
+$conn->close();
 
 ?>
 
@@ -64,16 +78,16 @@ echo "Connected successfully";
     <div class="container" class="tousPhotos">
         <div class="row">
             <div class="col">
-                <img src="zoom-bg.png" alt="test-image" height="100px" width="auto"
+                <img src="./images/zoom-bg.png" alt="test-image" height="100px" width="auto"
                     onclick="location.href='./specificImage.html'">
             </div>
             <div class="col">
-                <img src="voorpagina.jpeg" alt="test-image" height="100px" width="auto"
+                <img src="./images/voorpagina.jpeg" alt="test-image" height="100px" width="auto"
                     onclick="location.href='./specificImage.html'">
             </div>
 
             <div class="col">
-                <img src="voorpagina.jpeg" alt="test-image" height="100px" width="auto"
+                <img src="./images/voorpagina.jpeg" alt="test-image" height="100px" width="auto"
                     onclick="location.href='./specificImage.html'">
             </div>
         </div>
