@@ -1,3 +1,42 @@
+<?php
+session_start();
+require_once 'bdd.php';
+require_once 'utilisateur.php';
+require_once 'discussion.php';
+
+$link = getConnection($dbHost, $dbUser, $dbPwd, $dbName);
+
+$user = "";
+
+if(isset($_SESSION["user"])){
+    $user = $_SESSION["user"];
+}else{
+    session_unset();
+    header('Location: index.php');
+}
+
+if(isset($_POST["send"])){
+    $msg = $_POST["message"];
+    submitMessage($user, $msg, $link);
+}
+
+if(isset($_POST["sendImg"])){
+    $img = $_POST["image"];
+    submitImage($user, $img, $link);
+}
+
+if(isset($_POST["refresh"])){
+    header('Location: chat.php');
+}
+
+if(isset($_POST["disconnect"])){
+    setDisconnected($user, $link);
+    session_unset();
+    header('Location: index.php');
+}
+
+?>
+
 <!doctype html>
 <html lang="fr">
 
@@ -11,6 +50,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
