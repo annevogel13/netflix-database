@@ -16,7 +16,6 @@ echo "Connected successfully";
 
 ?>
 
-
 <!doctype html>
 <html lang="fr">
 
