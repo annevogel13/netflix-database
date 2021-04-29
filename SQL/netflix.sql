@@ -7,6 +7,10 @@ CREATE TABLE Categorie (
     nomCat VARCHAR (250) NOT NULL,
     PRIMARY KEY (catId)
 );
+
+/** ici on peut inserer d es categoreis 
+    le catId c'est une numero que on choisi ;-) 
+**/
 INSERT INTO Categorie (catId, nomCat)
 VALUES (1, 'fantasy');
 INSERT INTO Categorie (catId, nomCat)
@@ -25,6 +29,14 @@ CREATE TABLE Photo (
     PRIMARY KEY (photoId),
     FOREIGN KEY (catId) REFERENCES Categorie(catId)
 );
+
+/* de meme pour les photos. 
+    photoId = numero qu'on choissi
+    nomFich = le nom du fichier avec le .jpeg ou .png <-- tres important --> 
+    !!!! si tu trouve le photo tu le mets directement dans le /images avec le nom comme nomFich !!!
+    description = une phase (moi j'ai mis les description des netflix)
+    catId = est le numero qui correponds au categorie 
+*/
 INSERT INTO Photo (photoId, nomFich, description, catId)
 VALUES (
         999,
