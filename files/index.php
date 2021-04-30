@@ -48,15 +48,15 @@
     <div class="container" class="tousPhotos">
         <div class="row" id="photos">
             <div class="col">
-                <img src="./images/winx_sage.jpg">
+                <img src="../images/Elite.jpg">
             </div>
             <div class="col">
-                <img src="./images/voorpagina.jpeg" alt="test-image" height="100px" width="auto"
+                <img src="../images/voorpagina.jpeg" alt="test-image" height="100px" width="auto"
                     onclick="location.href='./specificImage.html'">
             </div>
 
             <div class="col">
-                <img src="./images/voorpagina.jpeg" alt="test-image" height="100px" width="auto"
+                <img src="../images/voorpagina.jpeg" alt="test-image" height="100px" width="auto"
                     onclick="location.href='./specificImage.html'">
             </div>
         </div>
