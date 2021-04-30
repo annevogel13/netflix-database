@@ -27,6 +27,8 @@
 .singleImage{
     width: 100px; 
     height : auto ;
+    margin : 10px; 
+    
     
 }
 
@@ -53,8 +55,8 @@
 }
 
 .center{
-    width : 350px;
-    margin-left : auto;
-    margin-right : auto;  
+    
+    margin-left : 5%;
+    margin-right : 5%;  
    
 }

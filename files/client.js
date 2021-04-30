@@ -43,3 +43,4 @@ function ajoutePhotoDatabase(){
 
     console.log("ajoute photo aux database");
 }
+

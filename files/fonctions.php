@@ -30,22 +30,35 @@ function createConnection($servername, $username, $password)
     return $conn;
 }
 
-$conn = createConnection($servername, $username, $password);
-
+function creerGridPhotos($conn)
+{
 $sql = "SELECT nomFich FROM `p1905532`.`Photo`";
 $result = $conn->query($sql);
 
-
-if ($result->num_rows > 0) {
-    echo "<table><tr><th>id de categorie</th><th>||</th><th>Name de categorie</th></tr>";
-    // output data of each row
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr><td><img src='../images/".$row["nomFich"]."'></td></tr>";
-        //console_log($row["nomFich"]);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage'>";
+            //console_log($row["nomFich"]);
+        }
+        
+    } else {
+        echo "0 results";
     }
-    echo "</table>";
-} else {
-    echo "0 results";
 }
 
-$conn->close();
+function recuperePhotoCategorie($conn, $idCategorie){
+    $sql = "SELECT nomFich FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result -> fetch_assoc()){
+            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage'>";
+        }
+    }else echo "0 results" ; 
+    
+}
+
+
+
+
+//$conn->close();
