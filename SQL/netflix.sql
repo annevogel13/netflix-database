@@ -6,7 +6,7 @@ CREATE TABLE Categorie (
     catId int NOT NULL,
     nomCat VARCHAR (250) NOT NULL,
     PRIMARY KEY (catId)
-);
+); 
 
 /** ici on peut inserer d es categoreis 
     le catId c'est une numero que on choisi ;-) 
@@ -28,7 +28,7 @@ CREATE TABLE Photo (
     catId int NOT NULL, 
     PRIMARY KEY (photoId),
     FOREIGN KEY (catId) REFERENCES Categorie(catId)
-);
+); 
 
 /* de meme pour les photos. 
     photoId = numero qu'on choissi
