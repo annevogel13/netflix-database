@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * variables globales 
+ */
 $servername = "localhost";
 $username = "p1905532";
 $password = "Shrill87Pebble";
 
+
+/**
+ * /brief function qui permet d'ecrire aux console pour aider avec debugger 
+ * /param 
+ */
 function console_log($output, $with_script_tags = true)
 {
     $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . ');';
@@ -15,7 +23,12 @@ function console_log($output, $with_script_tags = true)
 
 
 
-
+/**
+ * /brief fonction qui permet de connecte avec le base de donee
+ * /param $servername : nom de serveur
+ * /param $username : identifiant pour acceder aux serveur
+ * /param $password : mot de passe pour acceder aux serveur 
+ */
 function createConnection($servername, $username, $password)
 {
 
@@ -30,23 +43,11 @@ function createConnection($servername, $username, $password)
     return $conn;
 }
 
-function creerGridPhotos($conn)
-{
-$sql = "SELECT nomFich FROM `p1905532`.`Photo`";
-$result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage'>";
-            //console_log($row["nomFich"]);
-        }
-        
-    } else {
-        echo "0 results";
-    }
-}
-
+/**
+ * /brief fonction qui recupere les photos dans une certaine categorie 
+ * /param $conn : pour utiliser le connection avec le base de donnee
+ * /param $idCategorie : identifiant d'une categorie (1/2/3)
+ */
 function recuperePhotoCategorie($conn, $idCategorie){
     if($idCategorie == "%"){
         $sql = "SELECT nomFich from `p1905532`.`Photo`"; 
@@ -60,12 +61,15 @@ function recuperePhotoCategorie($conn, $idCategorie){
     
 }
 
+/**
+ * /brief fonction qui récupère le valeur dans le form pour choisir un categorie 
+ * /returns le identifiant du categorie 
+ */
 function recupereCategorieSelect(){
 
     if(isset($_POST['submit'])){
         if(!empty($_POST['categorie'])) {
             $selected = $_POST['categorie'];
-            echo 'You have chosen: ' . $selected;
             return $selected; 
         } else {
             echo 'Please select the value.';
@@ -73,6 +77,9 @@ function recupereCategorieSelect(){
     }
 }
 
+function greenbox($selected){
+    
+}
 
 
 

@@ -32,12 +32,12 @@
             <p class=" tekstChoisirPhotos">Quelles photos souhaitez-vous afficher? </p>
             <form action="" method="post">
                 <select name="categorie" id="categorie" required>
-                    <option value="%"></option>
+                    <option value="%">tous</option>
                     <option value="1">fantasy</option>
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
                 </select>
-                <input type="submit" name="submit" value="Choose options">
+                <input type="submit" name="submit" value="Choici categorie">
             </form>
             <?php $selected = recupereCategorieSelect(); ?>
         </div>
