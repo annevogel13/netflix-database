@@ -17,7 +17,7 @@
 <?php $conn = createConnection($servername, $username, $password);  ?>
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
-        <a class="navbar-brand" href="./index.html">Accueil</a>
+        <a class="navbar-brand" href="./index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.html">Ajoute Photo</a>
         <a class="nav-link" href="./login.html">Login</a>
     </nav>
