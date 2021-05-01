@@ -77,8 +77,43 @@ function recupereCategorieSelect(){
     }
 }
 
-function greenbox($selected){
-    
+function greenbox($conn, $idCategorie){
+    if($idCategorie == "%"){
+        $sql = "SELECT COUNT(nomFich) from `p1905532`.`Photo`"; 
+    }else $sql = "SELECT COUNT(nomFich) FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
+
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result -> fetch_assoc()){
+            echo $row["COUNT(nomFich)"]; 
+        }
+    }else echo "0 results" ; 
+}
+
+function recupereNouvellePhoto(){
+
+ if(isset($_POST['submitCategorie'])){
+        if(!empty($_POST['inputCategorie'])) {
+            $selected = $_POST['inputCategorie'];
+            echo $selected; 
+        } else {
+            echo 'Please select a category.';
+        }
+
+        if(!empty($_POST['inputFichier'])) {
+            $selected1 = $_POST['inputFichier'];
+            echo $selected1; 
+        } else {
+            echo 'Please select a file.';
+        }
+
+        if(!empty($_POST['inputDescription'])) {
+            $selected1 = $_POST['inputDescription'];
+            echo $selected1; 
+        } else {
+            echo 'Please select entre a descriptoin';
+        }
+ }
 }
 
 

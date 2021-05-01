@@ -19,12 +19,14 @@
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
-        <a class="nav-link" href="./ajoutePhoto.html">Ajoute Photo</a>
+        <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
         <a class="nav-link" href="./login.html">Login</a>
     </nav>
 
     <div id="greenbox" class="greenbox">
-        tous les photos sont selectionées
+        
+        <?php $selected = recupereCategorieSelect(); greenbox($conn, $selected) ?>
+     photo(s) selectionnée(s)
     </div>
 
     <div class="center">
@@ -39,7 +41,6 @@
                 </select>
                 <input type="submit" name="submit" value="Choici categorie">
             </form>
-            <?php $selected = recupereCategorieSelect(); ?>
         </div>
         <h2>Tous les photos</h2>
         <?php 
