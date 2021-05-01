@@ -15,6 +15,7 @@
 </head>
 
 <?php $conn = createConnection($servername, $username, $password);  ?>
+
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
@@ -29,18 +30,20 @@
     <div class="center">
         <div class="choisirCategorie">
             <p class=" tekstChoisirPhotos">Quelles photos souhaitez-vous afficher? </p>
-
-            <select name="categorie" id="categorie" required>
-            <option value="*"></option>
-            <option value="1">fantasy</option>
-            <option value="2">comedy</option>
-            <option value="3">dramas</option>
-            </select>
-            <button name="button1" value = "button1">confirmer</button>
+            <form action="" method="post">
+                <select name="categorie" id="categorie" required>
+                    <option value="%"></option>
+                    <option value="1">fantasy</option>
+                    <option value="2">comedy</option>
+                    <option value="3">dramas</option>
+                </select>
+                <input type="submit" name="submit" value="Choose options">
+            </form>
+            <?php $selected = recupereCategorieSelect(); ?>
         </div>
         <h2>Tous les photos</h2>
         <?php 
-               recuperePhotoCategorie($conn, 2);
+               recuperePhotoCategorie($conn, $selected);
             
             $conn->close(); 
         ?>

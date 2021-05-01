@@ -48,7 +48,9 @@ $result = $conn->query($sql);
 }
 
 function recuperePhotoCategorie($conn, $idCategorie){
-    $sql = "SELECT nomFich FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
+    if($idCategorie == "%"){
+        $sql = "SELECT nomFich from `p1905532`.`Photo`"; 
+    }else $sql = "SELECT nomFich FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
@@ -56,6 +58,19 @@ function recuperePhotoCategorie($conn, $idCategorie){
         }
     }else echo "0 results" ; 
     
+}
+
+function recupereCategorieSelect(){
+
+    if(isset($_POST['submit'])){
+        if(!empty($_POST['categorie'])) {
+            $selected = $_POST['categorie'];
+            echo 'You have chosen: ' . $selected;
+            return $selected; 
+        } else {
+            echo 'Please select the value.';
+        }
+    }
 }
 
 
