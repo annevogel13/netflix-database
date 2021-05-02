@@ -44,3 +44,18 @@ function ajoutePhotoDatabase(){
     console.log("ajoute photo aux database");
 }
 
+
+
+// esayer de generere une photo specifique page 
+
+// stap 1 : generale page for a image 
+// stap 2 : onclick function met essentiele waardes van de foto 
+// stap 3 : essentiele waardes worden in de pagina geimplementeerd 
+
+function genererPage(photoId, nomFich, description, catId){
+   // location.href = "https://bdw1.univ-lyon1.fr/p1905532/bdw1/files/specificImage.html";
+   // document.getElementById("test").innerHTML = "HALLLLLLLLL0"; 
+
+    console.log("console : "+photoId + ' '+ nomFich + ' '+ description + ' ' + catId+ ' '); 
+
+}

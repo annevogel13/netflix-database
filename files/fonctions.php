@@ -50,12 +50,13 @@ function createConnection($servername, $username, $password)
  */
 function recuperePhotoCategorie($conn, $idCategorie){
     if($idCategorie == "%"){
-        $sql = "SELECT nomFich from `p1905532`.`Photo`"; 
-    }else $sql = "SELECT nomFich FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
+        $sql = "SELECT nomFich, photoId, description, catId from `p1905532`.`Photo`"; 
+    }else $sql = "SELECT nomFich, photoId, description, catId FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
-            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage'>";
+            $onclick = "genererPage('".$row["photoId"]."','".$row["nomFich"]."','".$row["description"]."','".$row["catId"]."')"; 
+            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage' onclick = \"".$onclick."\">";
         }
     }else echo "0 results" ; 
     
