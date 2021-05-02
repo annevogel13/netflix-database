@@ -94,8 +94,9 @@ function recupereNouvellePhoto($conn){
     $newNomFich = $newDescription = $newCateogrie = ''; 
     if(isset($_POST['submitCategorie'])){
         if(!empty($_POST['inputCategorie'])) {
-            $newCateogrie = $_POST['inputCategorie'];
-            
+            if($_POST['inputCategorie'] === 'none'){
+                echo 'Please select a category.';
+            }else $newCateogrie = $_POST['inputCategorie'];
         } else {
             echo 'Please select a category.';
         }

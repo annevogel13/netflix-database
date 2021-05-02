@@ -3,7 +3,7 @@
 
 if(isset($_POST['submit'])){
     $file = $_FILES['file']; // is an array [name, type, tmp_name, error, size] 
-    echo $file['name']."<br>";
+    echo $file['tmp_name']."<br>";
     $fileName = $_FILES['file']['name'];
     $fileTmpName = $_FILES['file']['tmp_name']; // temporary location of file 
     $fileSize = $_FILES['file']['size']; // temporary location of file 
@@ -23,8 +23,10 @@ if(isset($_POST['submit'])){
                 echo "tmp Name : ".$fileTmpName."<br>";
                 echo "destination : ".$fileDestination."<br>";  
                 echo getcwd(); 
-                move_uploaded_file($fileTmpName, $fileName);
-               // header("Location: index.php?upload=succes");
+                //header("Location: ".$fileTmpName);
+                //copy($fileTmpName, $fileName); 
+                move_uploaded_file($fileTmpName, $fileDestination);
+               // 
             }else echo "your image is too big"; 
         } else echo "There was an error uploading your file";  
     }else echo "you cannot upload files of this type";
