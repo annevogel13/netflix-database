@@ -3,7 +3,7 @@
 
 if(isset($_POST['submit'])){
     $file = $_FILES['file']; // is an array [name, type, tmp_name, error, size] 
-    echo $file['tmp_name']."<br>";
+    
     $fileName = $_FILES['file']['name'];
     $fileTmpName = $_FILES['file']['tmp_name']; // temporary location of file 
     $fileSize = $_FILES['file']['size']; // temporary location of file 
@@ -19,7 +19,7 @@ if(isset($_POST['submit'])){
         if($fileError === 0 ){ // if 0 --> no errors 
             if($fileSize < 100000){ // taille of image 
                 $fileNameNew = uniqid('', true).".".$fileActualExt; // unique number <-- denk dat dat weg mag     
-                $fileDestination = '../uploads/'.$fileNameNew; // place where it's going to be
+                $fileDestination = '/var/www/p1905532/bdw1/files/uploads/'.$fileNameNew; // place where it's going to be
                 echo "tmp Name : ".$fileTmpName."<br>";
                 echo "destination : ".$fileDestination."<br>";  
                 echo getcwd(); 
