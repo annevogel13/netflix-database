@@ -21,7 +21,7 @@
     </nav>
 
     <div class="justify-content-sm-center">
-        <form action="" method="post">
+        <form action="upload.php" method="post">
             <div class="custom-file">
                 <label for="customFile">Choisir image</label>
                 <input type="file" class="custom-file-input" name="inputFichier" id="customFile">
@@ -48,12 +48,18 @@
             <h1> Test for upload/download image </h1>
             <form action="upload.php" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file">
+                <select name="inputCategorie" required>
+                    <option value="none">choisi une categorie</option>
+                    <option value="1">fantasy</option>
+                    <option value="2">comedy</option>
+                    <option value="3">dramas</option>
+                </select>
                 <button type="submit" name="submit">UPLOAD</button>
             </form>
         </div>
         <div>
 
-            <?php $conn = createConnection($servername, $username, $password); recupereNouvellePhoto($conn) ?>
+            <?php $conn = createConnection($servername, $username, $password); recupereNouvellePhoto($conn) ;// uploadImage() ?>
         </div>
 
 
