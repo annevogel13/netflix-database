@@ -92,7 +92,7 @@ function greenbox($conn, $idCategorie){
 
 function recupereNouvellePhoto($conn){ 
     $newNomFich = $newDescription = $newCateogrie = ''; 
- if(isset($_POST['submitCategorie'])){
+    if(isset($_POST['submitCategorie'])){
         if(!empty($_POST['inputCategorie'])) {
             $newCateogrie = $_POST['inputCategorie'];
             
@@ -114,21 +114,29 @@ function recupereNouvellePhoto($conn){
             echo 'Please select entre a description';
         }
     }
-    $newPhotoId = random_int(500, 950); 
+    $newPhotoId = random_int(500, 950); // genere une nouveaux photoId 
     insertPhoto($conn, $newPhotoId, $newNomFich, $newDescription, $newCateogrie); 
 
     
 }
 
+/**
+ * @function function qui ajoute une photo dans le database 
+ * @param $conn : connection
+ * @param {string} $photoId, $nomFich, $description, $catId 
+ */
 function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
     $sqlValues = "('".$photoId."', '".$nomFich."','".$description."','".$catId."')";  
     $sql = "INSERT INTO `p1905532`.`Photo` (photoId, nomFich, description, catId) VALUES".$sqlValues; 
-    echo $sql; 
+    //echo $sql; 
+    
     if($conn -> query($sql) === TRUE){
-        echo "New photo added"; 
-    }else {
+        echo "Nouvelle photo ajoute dans le database"; 
+        header("Location: index.php?ajout=succes");
+
+    } /*else {
         echo "Error: ".$sql."<br>".$conn->error; 
-    }
+    } */ 
 }
 
 
