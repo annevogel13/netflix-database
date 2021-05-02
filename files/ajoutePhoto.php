@@ -21,61 +21,42 @@
     </nav>
 
     <div class="justify-content-sm-center">
-    <form action="" method="post">
-                <div class="custom-file">  
-                    <input type="file" class="custom-file-input" name="inputFichier" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choisir fichier/photo</label>
-                </div>
-                <div class="form-group">
-                   <textarea class="form-control" name="inputDescription" id="exampleFormControlTextarea1" rows="2"></textarea>
-                   <label for="exampleFormControlTextarea1">Example textarea</label>
-                </div>
+        <form action="" method="post">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="inputFichier" id="customFile">
+                <label class="custom-file-label" for="customFile">Choisir fichier/photo</label>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
 
+                <textarea class="form-control" name="inputDescription" id="exampleFormControlTextarea1"
+                    rows="2"></textarea>
+            </div>
+            <div class="form-group">
                 <select name="inputCategorie" required>
-                    <option>none</option>
+                    <option>choisi une categorie</option>
                     <option value="1">fantasy</option>
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
                 </select>
-                <input type="submit" name="submitCategorie" value="Choici categorie">
-            </form>
+            </div>
+            <input type="submit" name="submitCategorie" value="Choici categorie">
+        </form>
 
 <!--
-        <form action="" method="post">
-            
-                <label for="customFile" class="col-sm-2 col-form-label">Select photo</label>
-                <div class="custom-file">  
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choisir fichier/photo</label>
-                </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-            </div>
 
-            <fieldset class="form-group">
-                <div class="form-group col-md-4">
-                    <label for="inputCategorie">categorie</label>
-                    <select id="inputCategorie" id="formCategorie" class="form-control">
-                        <option value="1">fantasy</option>
-                        <option value="2">comedy</option>
-                        <option value="3">dramas</option>
-                    </select>
-                </div>
+        <div>
+            <h1> Test for upload/download image </h1>
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <button type="submit" name="submit">UPLOAD</button>
+            </form>
+        </div>
+-->
+        <div>
 
-            </fieldset>
-            <div class="form-group row">
-                <div class="col-md-4">
-                    <input type="submit" name="submitNouvellePhoto" value="Ajoute photo">
-                </div>
-            </div>
-        </form> -->
-    </div>
-
-    <div>
-        value : 
-        <?php recupereNouvellePhoto() ?>
-    </div>
+            <?php $conn = createConnection($servername, $username, $password); recupereNouvellePhoto($conn) ?>
+        </div>
 
 
 </body>

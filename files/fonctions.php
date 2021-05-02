@@ -90,31 +90,50 @@ function greenbox($conn, $idCategorie){
     }else echo "0 results" ; 
 }
 
-function recupereNouvellePhoto(){
-
+function recupereNouvellePhoto($conn){ 
+    $newNomFich = $newDescription = $newCateogrie = ''; 
  if(isset($_POST['submitCategorie'])){
         if(!empty($_POST['inputCategorie'])) {
-            $selected = $_POST['inputCategorie'];
-            echo $selected; 
+            $newCateogrie = $_POST['inputCategorie'];
+            
         } else {
             echo 'Please select a category.';
         }
-
+        echo '<br>';
         if(!empty($_POST['inputFichier'])) {
-            $selected1 = $_POST['inputFichier'];
-            echo $selected1; 
+            $newNomFich = $_POST['inputFichier'];
+            //echo $selected1; 
+            
         } else {
             echo 'Please select a file.';
         }
-
+        
+        echo '<br>';
         if(!empty($_POST['inputDescription'])) {
-            $selected1 = $_POST['inputDescription'];
-            echo $selected1; 
+            $newDescription = $_POST['inputDescription'];
+           // echo $selected1; 
         } else {
-            echo 'Please select entre a descriptoin';
+            echo 'Please select entre a description';
         }
- }
+    }
+    $newPhotoId = random_int(500, 950); 
+    insertPhoto($conn, $newPhotoId, $newNomFich, $newDescription, $newCateogrie); 
+
+    
 }
+
+function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
+    $sqlValues = "('".$photoId."', '".$nomFich."','".$description."','".$catId."')";  
+    $sql = "INSERT INTO `p1905532`.`Photo` (photoId, nomFich, description, catId) VALUES".$sqlValues; 
+    echo $sql; 
+    if($conn -> query($sql) === TRUE){
+        echo "New photo added"; 
+    }else {
+        echo "Error: ".$sql."<br>".$conn->error; 
+    }
+}
+
+
 
 
 
