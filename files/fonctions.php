@@ -102,7 +102,6 @@ function recupereNouvellePhoto($conn){
         echo '<br>';
         if(!empty($_POST['inputFichier'])) {
             $newNomFich = $_POST['inputFichier'];
-            //echo $selected1; 
             
         } else {
             echo 'Please select a file.';
@@ -111,7 +110,6 @@ function recupereNouvellePhoto($conn){
         echo '<br>';
         if(!empty($_POST['inputDescription'])) {
             $newDescription = $_POST['inputDescription'];
-           // echo $selected1; 
         } else {
             echo 'Please select entre a description';
         }
