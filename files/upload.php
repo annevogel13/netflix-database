@@ -12,14 +12,15 @@ if(isset($_POST['submit'])){
     
     $fileExt = explode('.', $fileName); // file extension, explode takes the part after the . <-- extension
     $fileActualExt = strtolower(end($fileExt));// extension into lowercase, end() --> last element of array
+    $fileFirstName = $fileExt[0]; 
 
     $allowed = array('jpg', 'jpeg', 'png'); // extension allowed <-- all images 
 
     if(in_array($fileActualExt, $allowed)){ // extension is allowed
         if($fileError === 0 ){ // if 0 --> no errors 
             if($fileSize < 100000){ // taille of image 
-                $fileNameNew = uniqid('', true).".".$fileActualExt; // unique number <-- denk dat dat weg mag     
-                $fileDestination = '/var/www/p1905532/bdw1/files/uploads/'.$fileNameNew; // place where it's going to be
+               // $fileNameNew = uniqid('', true).".".$fileActualExt; // unique number <-- denk dat dat weg mag     
+                $fileDestination = '../images/'.$fileFirstName.".".$fileActualExt; // place where it's going to be
                 echo "tmp Name : ".$fileTmpName."<br>";
                 echo "destination : ".$fileDestination."<br>";  
                 echo getcwd(); 
