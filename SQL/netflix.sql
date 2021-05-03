@@ -33,11 +33,18 @@ CREATE TABLE Photo (
 ); 
 
 CREATE TABLE Utilisateur(
-    utId int NOT NULL,
+    utId VARCHAR (250) NULL,
     utMdP VARCHAR (250) NOT NULL,
-    utAdmin BOOLEAN, 
+    utAdmin VARCHAR (250) NOT NULL,  
     PRIMARY KEY (utId) 
 
+)
+/* 1 --> admin /true  , 0 --> utilisateur  */ 
+INSERT INTO Utilisateur (utId, utMdP, utAdmin)
+VALUES (
+        "p1905532",
+        "test",
+        "admin"      
 )
 
 /* de meme pour les photos. 

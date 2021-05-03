@@ -222,3 +222,19 @@ function getCategorieFromCatId($conn, $catId){
         }
     }           
 }
+
+
+
+function utilisateur($conn){
+        $sql = "SELECT utId, utMdP, utAdmin from `p1905532`.`Utilisateur`"; 
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                echo $row["utId"]."<br>";
+                echo $row["utMdP"]."<br>";
+                echo $row["utAdmin"]."<br>";
+            }
+        }else echo "0 results" ; 
+        
+    
+}

@@ -25,7 +25,9 @@
 
     <div id="greenbox" class="greenbox">
         
-        <?php $selected = recupereCategorieSelect();
+        <?php 
+        utilisateur($conn); 
+        $selected = recupereCategorieSelect();
                 if($selected === null){
                     if(!empty($_GET["categorie"])){
                         $selected = $_GET["categorie"];
@@ -54,7 +56,7 @@
         <?php 
                recuperePhotoCategorie($conn, $selected);
                
-            
+                
             $conn->close(); 
         ?>
     </div>
