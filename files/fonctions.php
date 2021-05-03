@@ -93,17 +93,17 @@ function greenbox($conn, $idCategorie){
 
 function recupereNouvellePhoto($conn){ 
     $newNomFich = $newDescription = $newCateogrie = ''; 
-    if(isset($_POST['submitCategorie'])){
+   
         if(!empty($_POST['inputCategorie'])) {
             if($_POST['inputCategorie'] === 'none'){
                 echo 'Please select a category.';
-            }else $newCateogrie = $_POST['inputCategorie'];
+            }else $newCateogrie = $_POST['inputCategorie']; echo $newCateogrie; 
         } else {
             echo 'Please select a category.';
         }
         echo '<br>';
-        if(!empty($_POST['inputFichier'])) {
-            $newNomFich = $_POST['inputFichier'];
+        if(!empty($_FILES['file'])) {
+            $newNomFich = $_FILES['file']['name'];; echo $newNomFich;
             
         } else {
             echo 'Please select a file.';
@@ -112,10 +112,11 @@ function recupereNouvellePhoto($conn){
         echo '<br>';
         if(!empty($_POST['inputDescription'])) {
             $newDescription = $_POST['inputDescription'];
+            echo $newDescription;
         } else {
             echo 'Please select entre a description';
         }
-    }
+
     $newPhotoId = random_int(500, 950); // genere une nouveaux photoId 
     insertPhoto($conn, $newPhotoId, $newNomFich, $newDescription, $newCateogrie); 
 
@@ -134,7 +135,7 @@ function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
     
     if($conn -> query($sql) === TRUE){
         echo "Nouvelle photo ajoute dans le database"; 
-        header("Location: index.php?ajout=succes");
+       // header("Location: index.php?ajout=succes");
 
     } /*else {
         echo "Error: ".$sql."<br>".$conn->error; 

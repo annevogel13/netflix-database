@@ -32,7 +32,7 @@
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
                 </select>
-                <input type="text" name="inputDescriptoin">
+                <input type="text" name="inputDescription">
                 <button type="submit" name="submit">UPLOAD</button>
             </form>
         </div>

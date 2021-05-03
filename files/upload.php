@@ -2,44 +2,8 @@
 <?php 
 include 'fonctions.php' ;
 
+
 $conn = createConnection($servername, $username, $password);
-
-
-$newNomFich = $newDescription = $newCateogrie = ''; 
-if(isset($_POST['submit'])){
-    if(!empty($_POST['inputCategorie'])) {
-        if($_POST['inputCategorie'] === 'none'){
-            echo 'Please select a category.';
-        }else $newCateogrie = $_POST['inputCategorie'];
-    } else {
-        echo 'Please select a category.';
-    }
-    echo '<br>';
-    if(!empty($_POST['inputFichier'])) {
-        $newNomFich = $_POST['inputFichier'];
-        
-    } else {
-        echo 'Please select a file.';
-    }
-    
-    echo '<br>';
-    if(!empty($_POST['inputDescription'])) {
-        $newDescription = $_POST['inputDescription'];
-    } else {
-        echo 'Please select entre a description';
-    }
-}
-
-$newPhotoId = random_int(500, 950);
-$sqlValues = "('".$newPhotoId."', '".$newNomFich."','".$newDescription."','".$newCateogrie."')";  
-$sql = "INSERT INTO `p1905532`.`Photo` (photoId, nomFich, description, catId) VALUES".$sqlValues; 
-//echo $sql; 
-
-if($conn -> query($sql) === TRUE){
-    echo "Nouvelle photo ajoute dans le database"; 
-    header("Location: index.php?ajout=succes");
-
-} 
 
 
 
@@ -68,6 +32,8 @@ if(isset($_POST['submit'])){
                 echo "tmp Name : ".$fileTmpName."<br>";
                 echo "destination : ".$fileDestination."<br>";  
                 move_uploaded_file($fileTmpName, $fileDestination);
+
+                recupereNouvellePhoto($conn); 
             }else echo "your image is too big"; 
         } else echo "There was an error uploading your file";  
     }else echo "you cannot upload files of this type";
