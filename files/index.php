@@ -42,7 +42,7 @@
                 <input type="submit" name="submit" value="Choici categorie">
             </form>
         </div>
-        <h2>Tous les photos</h2>
+        <h2>Tous</h2>
         <?php 
                recuperePhotoCategorie($conn, $selected);
             
@@ -56,11 +56,13 @@
 
 </html>
 
-
+<!--
+    
 <?php
+/* 
 session_start();
-require_once 'files/bd.php';
-require_once 'files/utilisateur.php';
+include 'bd.php';
+include 'utilisateur.php';
 
 $stateMsg = "";
 
@@ -82,7 +84,7 @@ if(isset($_POST["valider"])){
 
 if(isset($_GET["subscribe"])){
     $successMsg = "<div class='sucessMsg'>L'inscription a bien &eacute;t&eacute; effectu&eacute;e, vous pouvez vous connecter</div>";
-}
+} */ 
 ?>
 
 <!doctype html>
@@ -95,8 +97,8 @@ if(isset($_GET["subscribe"])){
 <body>
     
     <div class="loginBanner">
-    <div class="errorMsg"><?php echo $stateMsg; ?></div>
-    <?php if(isset($successMsg)){echo $successMsg;} ?>
+    <div class="errorMsg"><?php //echo $stateMsg; ?></div>
+    <?php // if(isset($successMsg)){echo $successMsg;} ?>
         <form action="index.php" method="POST">
             <table>
                 <tr><td class="loginInfo">Pseudo:</td><td><input type="text" name="pseudo"></td></tr>
@@ -108,4 +110,4 @@ if(isset($_GET["subscribe"])){
         <a class="loginInfo" href="inscription.php">Premi&egrave;re connexion?</a>
     </div>
 </body>
-</html>
+</html>-->
