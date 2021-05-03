@@ -172,7 +172,7 @@ function ajoutePhoto($conn){
         $result = $conn->query($sql);
         if($result->num_rows > 0){
             while($row = $result -> fetch_assoc()){
-              
+                $url = "index.php?categorie=".$row['catId']; 
                 $nomCat = getCategorieFromCatId($conn, $row["catId"]); 
                 echo "<div class=\"col\">
                         <table class=\"table table-bordered\">
@@ -186,7 +186,7 @@ function ajoutePhoto($conn){
                             </tr>
                             <tr>
                                 <th scope=\"row\">categorie</th>
-                                <th>".$nomCat."</th>
+                                <th><a href='".$url."'>".$nomCat."</a></th>
                             </tr>
                         </table>
                     </div> ";

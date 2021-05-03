@@ -25,7 +25,15 @@
 
     <div id="greenbox" class="greenbox">
         
-        <?php $selected = recupereCategorieSelect(); greenbox($conn, $selected) ?>
+        <?php $selected = recupereCategorieSelect();
+                if($selected === null){
+                    if(!empty($_GET["categorie"])){
+                        $selected = $_GET["categorie"];
+                    }else $selected = '%';             
+                }  
+            
+            ; greenbox($conn, $selected) 
+        ?>
      photo(s) selectionnée(s)
     </div>
 
@@ -45,6 +53,7 @@
         <h2>Tous</h2>
         <?php 
                recuperePhotoCategorie($conn, $selected);
+               
             
             $conn->close(); 
         ?>
@@ -55,59 +64,3 @@
 </body>
 
 </html>
-
-<!--
-    
-<?php
-/* 
-session_start();
-include 'bd.php';
-include 'utilisateur.php';
-
-$stateMsg = "";
-
-if(isset($_POST["valider"])){
-    $pseudo = $_POST["pseudo"];
-    $hashMdp = md5($_POST["mdp"]);
-    
-    $link = getConnection($dbHost, $dbUser, $dbPwd, $dbName);
-    
-    $exist = getUser($pseudo, $hashMdp, $link);
-    if($exist){
-        setConnected($pseudo, $link);
-        $_SESSION["user"] = $pseudo;
-        header('Location: login.php');
-    }else{
-        $stateMsg = "Le couple pseudo/mot de passe ne correspond &agrave; aucun utilisateur enregistr&eacute;";
-    }
-}
-
-if(isset($_GET["subscribe"])){
-    $successMsg = "<div class='sucessMsg'>L'inscription a bien &eacute;t&eacute; effectu&eacute;e, vous pouvez vous connecter</div>";
-} */ 
-?>
-
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Bienvenue </title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-    <div class="loginBanner">
-    <div class="errorMsg"><?php //echo $stateMsg; ?></div>
-    <?php // if(isset($successMsg)){echo $successMsg;} ?>
-        <form action="index.php" method="POST">
-            <table>
-                <tr><td class="loginInfo">Pseudo:</td><td><input type="text" name="pseudo"></td></tr>
-                <tr><td class="loginInfo">Mot de passe:</td><td><input type="password" name="mdp"></td></tr>
-                <br/>
-                <tr><td><input class="button" type="submit" name="valider" value="Se connecter">
-            </table>
-        </form>
-        <a class="loginInfo" href="inscription.php">Premi&egrave;re connexion?</a>
-    </div>
-</body>
-</html>-->
