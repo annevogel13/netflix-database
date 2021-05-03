@@ -127,8 +127,9 @@ function recupereNouvellePhoto($conn){
  * /param {string} $photoId, $nomFich, $description, $catId 
  */
 function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
-    $sqlValues = "('".$photoId."', '".$nomFich."','".$description."','".$catId."')";  
-    $sql = "INSERT INTO `p1905532`.`Photo` (photoId, nomFich, description, catId) VALUES".$sqlValues; 
+    $utId = 'AnneVogel'; 
+    $sqlValues = "('".$photoId."', '".$nomFich."','".$description."','".$catId."','".$utId."')";  
+    $sql = "INSERT INTO `p1905532`.`Photo` (photoId, nomFich, description, catId, utId) VALUES".$sqlValues; 
     //echo $sql; 
     
     if($conn -> query($sql) === TRUE){
@@ -181,7 +182,7 @@ function ajoutePhoto($conn){
 
 function recuperePhoto($conn, $idPhoto){
         
-    $sql = "SELECT nomFich, description, catId FROM `p1905532`.`Photo` WHERE photoId = ".$idPhoto;
+    $sql = "SELECT nomFich, description, catId, utId FROM `p1905532`.`Photo` WHERE photoId = ".$idPhoto;
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
@@ -201,9 +202,13 @@ function recuperePhoto($conn, $idPhoto){
                             <th scope=\"row\">Categorie</th>
                             <th><a href='".$url."'>".$nomCat."</a></th>
                         </tr>
+                        <tr>
+                            <th scope=\"row\">Fait par</th>
+                            <th>".$row["utId"]."</th>
+                        </tr>
                     </table>
                 ";
-            echo "<img src='../images/" . $row["nomFich"] . "' height=\"400px\" width=\"auto\">";
+            echo "<img src='../images/" . $row["nomFich"] . "' class=\"mx-auto\" style=\"width: 500px; height=\"auto\" width=\"500px\">";
         }
     }else echo "0 results" ;   
 }

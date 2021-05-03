@@ -22,10 +22,10 @@
         <a class="nav-link" href="./login.php">Login</a>
     </nav>
 
-    <div class="mx-auto" style="width: 700px;">
+    <div class="mx-auto" style="width: 900px;">
         <h1 class="mt-3">Delete photo</h1>
         <h3 class="mt-3">Clique sur le photo que vous voulez supprimer?</h3> 
-        <h6 class="mt-3">Apres recharge la page</h6>
+        <h6 class="mt-3">Apres recharge la page --> voire le resultat</h6>
 
 
         <?php 
@@ -41,7 +41,7 @@
                 supprimerPhoto($conn, $utId, $photoDelete); 
                
             }
-            
+
             function recuperePhotosUtilisateur($conn, $utId){
                 $sql = "SELECT utId, nomFich FROM  `p1905532`.`Photo` WHERE utId ='".$utId."'"; 
                 $result = $conn->query($sql);
