@@ -2,11 +2,13 @@
 <?php 
 include 'fonctions.php' ;
 
-
+// creation du connection 
 $conn = createConnection($servername, $username, $password);
+// upload image + ajoute photo aux data base
+ajoutePhoto($conn); 
 
 
-
+function ajoutePhoto($conn){
 /// upload image 
 if(isset($_POST['submit'])){
 
@@ -23,11 +25,11 @@ if(isset($_POST['submit'])){
     $fileActualExt = strtolower(end($fileExt));// extension into lowercase, end() --> last element of array
     $fileFirstName = $fileExt[0]; 
 
-    $allowed = array('jpg', 'jpeg', 'png'); // extension allowed <-- all images 
+    $allowed = array('gif', 'jpeg', 'png'); // extension allowed 
 
     if(in_array($fileActualExt, $allowed)){ // extension is allowed
         if($fileError === 0 ){ // if 0 --> no errors 
-            if($fileSize < 100000){ // taille of image      
+            if($fileSize <  800000){ // taille of image max = 100 ko = 100 * 8 o = 800000      
                 $fileDestination = '../images/'.$fileFirstName.".".$fileActualExt; // place where it's going to be
                 echo "tmp Name : ".$fileTmpName."<br>";
                 echo "destination : ".$fileDestination."<br>";  
@@ -38,6 +40,5 @@ if(isset($_POST['submit'])){
         } else echo "There was an error uploading your file";  
     }else echo "you cannot upload files of this type";
 }
-
-
+}
 ?>

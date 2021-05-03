@@ -96,7 +96,7 @@ function recupereNouvellePhoto($conn){
    
         if(!empty($_POST['inputCategorie'])) {
             if($_POST['inputCategorie'] === 'none'){
-                echo 'Please select a category.';
+                echo 'Please select a category.'; // si il y a pas une categorie selectionnee 
             }else $newCateogrie = $_POST['inputCategorie']; echo $newCateogrie; 
         } else {
             echo 'Please select a category.';
@@ -106,7 +106,7 @@ function recupereNouvellePhoto($conn){
             $newNomFich = $_FILES['file']['name'];; echo $newNomFich;
             
         } else {
-            echo 'Please select a file.';
+            echo 'Please select a file.'; // si il y a pas une fichier selectionnee
         }
         
         echo '<br>';
@@ -114,7 +114,7 @@ function recupereNouvellePhoto($conn){
             $newDescription = $_POST['inputDescription'];
             echo $newDescription;
         } else {
-            echo 'Please select entre a description';
+            echo 'Please select entre a description'; // si aucun descriptoin est saisi 
         }
 
     $newPhotoId = random_int(500, 950); // genere une nouveaux photoId 
@@ -135,7 +135,7 @@ function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
     
     if($conn -> query($sql) === TRUE){
         echo "Nouvelle photo ajoute dans le database"; 
-       // header("Location: index.php?ajout=succes");
+        header("Location: index.php?ajout=succes");
 
     } /*else {
         echo "Error: ".$sql."<br>".$conn->error; 

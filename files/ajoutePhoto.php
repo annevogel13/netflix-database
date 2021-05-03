@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="fr">
 
-<?php   ?> 
+<?php   ?>
 
 <head>
     <meta charset="utf-8">
@@ -22,27 +22,36 @@
         <a class="nav-link" href="./login.html">Login</a>
     </nav>
 
-        <div>
-            <h1> Test for upload/download image </h1>
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
-                <input type="file" name="file">
-                <select name="inputCategorie" required>
-                    <option value="none">choisi une categorie</option>
+    <div class="mx-auto" style="width: 500px;">
+        <h1> Ajoute image </h1>
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <div class="mb-3 mt-3">
+                <label for="file" class="form-label">Choisir une image</label>
+                <input type="file" class="form-control" name="file">
+            </div>
+            <div class="mb-3">
+                <label for="inputCategorie" class="form-label">Choisir une image</label>
+                <select name="inputCategorie" class="form-control" required>
+                    <option value="none"></option>
                     <option value="1">fantasy</option>
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
                 </select>
-                <input type="text" name="inputDescription">
-                <button type="submit" name="submit">UPLOAD</button>
-            </form>
-        </div>
-        <div>
+            </div>
+            <div>
+                <label for="inputDescription" class="form-label">Saisie une descriptoin</label> 
+                <input type="text" class="form-control" rows="2" name="inputDescription">
+            </div>
+            <button class="btn btn-primary mt-3" type="submit" name="submit">UPLOAD</button>
+        </form>
+    </div>
+    <div>
 
-            <?php   //$conn = createConnection($servername, $username, $password); 
+        <?php   //$conn = createConnection($servername, $username, $password); 
                     //recupereNouvellePhoto($conn) ;// uploadImage() 
                    // uploadImage(); 
             ?>
-        </div>
+    </div>
 
 
 </body>
