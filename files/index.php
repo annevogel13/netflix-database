@@ -59,8 +59,8 @@
 
 <?php
 session_start();
-require_once 'fonctions/bd.php';
-require_once 'fonctions/utilisateur.php';
+require_once 'files/bd.php';
+require_once 'files/utilisateur.php';
 
 $stateMsg = "";
 
@@ -74,7 +74,7 @@ if(isset($_POST["valider"])){
     if($exist){
         setConnected($pseudo, $link);
         $_SESSION["user"] = $pseudo;
-        header('Location: chat.php');
+        header('Location: login.php');
     }else{
         $stateMsg = "Le couple pseudo/mot de passe ne correspond &agrave; aucun utilisateur enregistr&eacute;";
     }
