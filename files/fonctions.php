@@ -24,7 +24,7 @@ function createConnection($servername, $username, $password)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Connected successfully<br>";
+    echo "The database is online<br>";
     return $conn;
 }
 
@@ -81,30 +81,33 @@ function recupereNouvellePhoto($conn){
    
         if(!empty($_POST['inputCategorie'])) {
             if($_POST['inputCategorie'] === 'none'){
-                echo 'Please select a category.'; // si il y a pas une categorie selectionnee 
+                echo 'Please select a category.<br>'; // si il y a pas une categorie selectionnee 
             }else $newCateogrie = $_POST['inputCategorie']; //echo $newCateogrie; 
         } else {
             echo 'Please select a category.';
+            echo '<br>';
         }
-        echo '<br>';
+        
         if(!empty($_FILES['file'])) {
             $newNomFich = $_FILES['file']['name'];; //echo $newNomFich;
             
         } else {
-            echo 'Please select a file.'; // si il y a pas une fichier selectionnee
+            echo 'Please select a file.<br>'; // si il y a pas une fichier selectionnee
         }
         
-        echo '<br>';
+        
         if(!empty($_POST['inputDescription'])) {
-            $newDescription = $_POST['inputDescription'];
+            if($_POST['inputDescription'] === ''){
+                echo 'Please enter a descriptoin.<br>';
+            }else $newDescription = $_POST['inputDescription'];
            // echo $newDescription;
         } else {
-            echo 'Please select entre a description'; // si aucun descriptoin est saisi 
+            echo 'Please enter a description'; // si aucun descriptoin est saisi 
         }
 
     $newPhotoId = random_int(500, 950); // genere une nouveaux photoId 
+    
     insertPhoto($conn, $newPhotoId, $newNomFich, $newDescription, $newCateogrie); 
-
     
 }
 
@@ -159,7 +162,7 @@ function ajoutePhoto($conn){
                     
                 }else echo "your image is too big"; 
             } else echo "There was an error uploading your file";  
-        }else echo "you cannot upload files of this type, you either didn't select a file or the file is the wrong type. The supported type is jpeg, png, gif";
+        }else echo "You cannot upload files of this type <br> You either didn't select a file or the file is the wrong type <br> The supported type is jpeg, png, gif";
     }
     }
 

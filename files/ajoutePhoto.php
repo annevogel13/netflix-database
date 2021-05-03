@@ -46,7 +46,7 @@
             <button class="btn btn-primary mt-3" type="submit" name="submit">UPLOAD</button>
         </form>
         <div class="mt-3">
-            <h3>Gestion des erreurs</h3>
+            <h3>Message des erreurs</h3>
             <?php   
                 // creation du connection 
                 $conn = createConnection($servername, $username, $password);
