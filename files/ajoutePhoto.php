@@ -4,7 +4,6 @@
 <!doctype html>
 <html lang="fr">
 
-<?php   ?>
 
 <head>
     <meta charset="utf-8">
