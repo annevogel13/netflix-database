@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="fr">
 
+<?php
+    include 'fonctions.php'; 
+    $conn = createConnection($servername, $username, $password);
+?>
+
 <head>
     <meta charset="utf-8">
     <title>Details</title>
@@ -11,7 +16,7 @@
 </head>
 
 <body>
-
+    
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
@@ -22,36 +27,17 @@
 
             <div class="col" margin-top="15px">
                 <h2>Details sur une photo</h2>
-                <p id="test">" "</p>
-            </div>
-            
+                <p id="test">
+                    <?php
+                      
+                       $idPhoto = $_GET["photoId"]; 
+                       recuperePhoto($conn, $idPhoto); 
+
+                    ?>
+
+                </p>
+            </div>    
         </div>
-
-        <div class="row">
-            <div class="col" id="tousLesPhotos">
-
-                <div class="singleImage">
-                    <img src="zoom-bg.png" alt="test-image" height="250px" width="auto">
-                </div>
-            </div>
-            <div class="col">
-                <table class="table table-bordered">
-                    <tr>
-                        <th scope="row">Description</th>
-                        <th>description of the image</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">Nom du fichier</th>
-                        <th>photo.jpeg</th>
-                    </tr>
-                    <tr>
-                        <th scope="row">categorie</th>
-                        <th>animaux</th>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
     </div>
 
 </body>

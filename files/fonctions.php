@@ -40,7 +40,7 @@ function recuperePhotoCategorie($conn, $idCategorie){
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
-            $url = "photo.php?uploadsucces=".$row['photoId']; 
+            $url = "photo.php?photoId=".$row['photoId']; 
             $onclick = "onclick = \"parent.location='".$url."'\""; 
             echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage' ".$onclick.">";
         }
@@ -164,7 +164,44 @@ function ajoutePhoto($conn){
             } else echo "There was an error uploading your file";  
         }else echo "You cannot upload files of this type <br> You either didn't select a file or the file is the wrong type <br> The supported type is jpeg, png, gif";
     }
+}
+
+    function recuperePhoto($conn, $idPhoto){
+        
+         $sql = "SELECT nomFich, description, catId FROM `p1905532`.`Photo` WHERE photoId = ".$idPhoto;
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+              
+                $nomCat = getCategorieFromCatId($conn, $row["catId"]); 
+                echo "<div class=\"col\">
+                        <table class=\"table table-bordered\">
+                            <tr>
+                                <th scope=\"row\">Description</th>
+                                <th>".$row["description"]."</th>
+                            </tr>
+                            <tr>
+                                <th scope=\"row\">Nom du fichier</th>
+                                <th>".$row["nomFich"]."</th>
+                            </tr>
+                            <tr>
+                                <th scope=\"row\">categorie</th>
+                                <th>".$nomCat."</th>
+                            </tr>
+                        </table>
+                    </div> ";
+                    echo "<img src='../images/" . $row["nomFich"] . "' height=\"250px\" width=\"auto\">";
+                }
+        }else echo "0 results" ; 
+        
     }
 
-
-
+function getCategorieFromCatId($conn, $catId){
+    $sql = "SELECT nomCat FROM `p1905532`.`Categorie` WHERE catId = ".$catId;
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result -> fetch_assoc()){
+            return $row["nomCat"]; 
+        }
+    }           
+}
