@@ -1,4 +1,10 @@
 <?php
+
+    $dbHost = "localhost";
+    $dbUser = "p1906670";
+    $dbPwd = "Prison27Suffix";
+    $dbName = "p1906670";
+
     {
         $link = mysqli_connect($dbHost, $dbUser, $dbPwd, $dbName);
         if (!$link) {
@@ -20,6 +26,15 @@
         if(!$result){
             echo "La requete de mise a jour n'a pas pu etre executee a cause d'une erreur de syntaxe";
         }
+    }
+
+    {
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+          }
+          echo "Connected successfully";
+
+
     }
 
 ?>
