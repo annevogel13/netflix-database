@@ -24,7 +24,7 @@
 
     <div class="mx-auto" style="width: 500px;">
         <h1 class="mt-3"> Ajoute image </h1>
-        <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 <label for="file" class="form-label">Choisir une image</label>
                 <input type="file" class="form-control" name="file">
@@ -45,13 +45,15 @@
             </div>
             <button class="btn btn-primary mt-3" type="submit" name="submit">UPLOAD</button>
         </form>
-    </div>
-    <div>
-
-        <?php   //$conn = createConnection($servername, $username, $password); 
-                    //recupereNouvellePhoto($conn) ;// uploadImage() 
-                   // uploadImage(); 
+        <div class="mt-3">
+            <h3>Gestion des erreurs</h3>
+            <?php   
+                // creation du connection 
+                $conn = createConnection($servername, $username, $password);
+                // upload image + ajoute photo aux data base
+                ajoutePhoto($conn); 
             ?>
+        </div>
     </div>
 
 

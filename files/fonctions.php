@@ -9,21 +9,6 @@ $password = "Shrill87Pebble";
 
 
 /**
- * /brief function qui permet d'ecrire aux console pour aider avec debugger 
- * /param 
- */
-function console_log($output, $with_script_tags = true)
-{
-    $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . ');';
-    if ($with_script_tags) {
-        $js_code = '<script>' . $js_code . '</script>';
-    }
-    echo $js_code;
-}
-
-
-
-/**
  * /brief fonction qui permet de connecte avec le base de donee
  * /param $servername : nom de serveur
  * /param $username : identifiant pour acceder aux serveur
@@ -97,13 +82,13 @@ function recupereNouvellePhoto($conn){
         if(!empty($_POST['inputCategorie'])) {
             if($_POST['inputCategorie'] === 'none'){
                 echo 'Please select a category.'; // si il y a pas une categorie selectionnee 
-            }else $newCateogrie = $_POST['inputCategorie']; echo $newCateogrie; 
+            }else $newCateogrie = $_POST['inputCategorie']; //echo $newCateogrie; 
         } else {
             echo 'Please select a category.';
         }
         echo '<br>';
         if(!empty($_FILES['file'])) {
-            $newNomFich = $_FILES['file']['name'];; echo $newNomFich;
+            $newNomFich = $_FILES['file']['name'];; //echo $newNomFich;
             
         } else {
             echo 'Please select a file.'; // si il y a pas une fichier selectionnee
@@ -112,7 +97,7 @@ function recupereNouvellePhoto($conn){
         echo '<br>';
         if(!empty($_POST['inputDescription'])) {
             $newDescription = $_POST['inputDescription'];
-            echo $newDescription;
+           // echo $newDescription;
         } else {
             echo 'Please select entre a description'; // si aucun descriptoin est saisi 
         }
@@ -143,38 +128,40 @@ function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
 }
 
 
-
-function uploadImage(){
-
-    if(isset($_POST['submitCategorie'])){
-
+function ajoutePhoto($conn){
+    /// upload image 
+    if(isset($_POST['submit'])){
+    
         // upload file (== image)
-        $file = $_FILES['inputFichier']; // is an array [name, type, tmp_name, error, size] 
+        $file = $_FILES['file']; // is an array [name, type, tmp_name, error, size] 
         
-        $fileName = $_FILES['inputFichier']['name'];
-        $fileTmpName = $_FILES['inputFichier']['tmp_name']; // temporary location of file 
-        $fileSize = $_FILES['inputFichier']['size']; // size of file 
-        $fileError = $_FILES['inputFichier']['error']; // error  
-        $fileType = $_FILES['inputFichier']['type']; // type of file 
+        $fileName = $_FILES['file']['name'];
+        $fileTmpName = $_FILES['file']['tmp_name']; // temporary location of file 
+        $fileSize = $_FILES['file']['size']; // size of file 
+        $fileError = $_FILES['file']['error']; // error  
+        $fileType = $_FILES['file']['type']; // type of file 
         
         $fileExt = explode('.', $fileName); // file extension, explode takes the part after the . <-- extension
         $fileActualExt = strtolower(end($fileExt));// extension into lowercase, end() --> last element of array
         $fileFirstName = $fileExt[0]; 
     
-        $allowed = array('jpg', 'jpeg', 'png'); // extension allowed <-- all images 
+        $allowed = array('gif', 'jpeg', 'png'); // extension allowed 
     
         if(in_array($fileActualExt, $allowed)){ // extension is allowed
             if($fileError === 0 ){ // if 0 --> no errors 
-                if($fileSize < 100000){ // taille of image      
+                if($fileSize <  800000){ // taille of image max = 100 ko = 100 * 8 o = 800000      
                     $fileDestination = '../images/'.$fileFirstName.".".$fileActualExt; // place where it's going to be
-                    echo "tmp Name : ".$fileTmpName."<br>";
-                    echo "destination : ".$fileDestination."<br>";  
+                   // echo "tmp Name : ".$fileTmpName."<br>";
+                  //  echo "destination : ".$fileDestination."<br>"; 
+                   
                     move_uploaded_file($fileTmpName, $fileDestination);
+                    recupereNouvellePhoto($conn); 
+                    
                 }else echo "your image is too big"; 
             } else echo "There was an error uploading your file";  
         }else echo "you cannot upload files of this type";
     }
-    
-}
+    }
 
-//$conn->close();
+
+
