@@ -23,24 +23,25 @@
     </nav>
 
     <div class="mx-auto" style="width: 500px;">
-        <h1> Ajoute image </h1>
+        <h1 class="mt-3"> Ajoute image </h1>
         <form action="upload.php" method="POST" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 <label for="file" class="form-label">Choisir une image</label>
                 <input type="file" class="form-control" name="file">
             </div>
+
+            <div>
+                <label for="inputDescription" class="form-label">Saisie une descriptoin</label> 
+                <textarea class="form-control" rows="2" name="inputDescription"></textarea>
+            </div>
             <div class="mb-3">
                 <label for="inputCategorie" class="form-label">Choisir une image</label>
                 <select name="inputCategorie" class="form-control" required>
-                    <option value="none"></option>
+                    <option value="none">choisir une cateagorie</option>
                     <option value="1">fantasy</option>
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
                 </select>
-            </div>
-            <div>
-                <label for="inputDescription" class="form-label">Saisie une descriptoin</label> 
-                <input type="text" class="form-control" rows="2" name="inputDescription">
             </div>
             <button class="btn btn-primary mt-3" type="submit" name="submit">UPLOAD</button>
         </form>
