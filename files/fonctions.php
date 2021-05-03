@@ -159,7 +159,7 @@ function ajoutePhoto($conn){
                     
                 }else echo "your image is too big"; 
             } else echo "There was an error uploading your file";  
-        }else echo "you cannot upload files of this type";
+        }else echo "you cannot upload files of this type, you either didn't select a file or the file is the wrong type. The supported type is jpeg, png, gif";
     }
     }
 
