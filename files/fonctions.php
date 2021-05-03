@@ -187,7 +187,7 @@ function recuperePhoto($conn, $idPhoto){
         while($row = $result -> fetch_assoc()){
             $url = "index.php?categorie=".$row['catId']; 
             $nomCat = getCategorieFromCatId($conn, $row["catId"]); 
-            echo "<div class=\"col\">
+            echo "
                     <table class=\"table table-bordered\">
                         <tr>
                             <th scope=\"row\">Description</th>
@@ -198,12 +198,12 @@ function recuperePhoto($conn, $idPhoto){
                             <th>".$row["nomFich"]."</th>
                         </tr>
                         <tr>
-                            <th scope=\"row\">categorie</th>
+                            <th scope=\"row\">Categorie</th>
                             <th><a href='".$url."'>".$nomCat."</a></th>
                         </tr>
                     </table>
-                </div> ";
-            echo "<img src='../images/" . $row["nomFich"] . "' height=\"250px\" width=\"auto\">";
+                ";
+            echo "<img src='../images/" . $row["nomFich"] . "' height=\"400px\" width=\"auto\">";
         }
     }else echo "0 results" ;   
 }

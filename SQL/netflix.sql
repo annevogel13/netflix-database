@@ -26,9 +26,19 @@ CREATE TABLE Photo (
     nomFich VARCHAR (250) NOT NULL,
     description VARCHAR(250) NOT NULL,
     catId int NOT NULL, 
+    utId int NOT NULL, 
     PRIMARY KEY (photoId),
-    FOREIGN KEY (catId) REFERENCES Categorie(catId)
+    FOREIGN KEY (catId) REFERENCES Categorie(catId),
+    FOREIGN KEY (utID) REFERENCES Utilisateur(utId)
 ); 
+
+CREATE TABLE Utilisateur(
+    utId int NOT NULL,
+    utMdP VARCHAR (250) NOT NULL,
+    utAdmin BOOLEAN, 
+    PRIMARY KEY (utId) 
+
+)
 
 /* de meme pour les photos. 
     photoId = numero qu'on choissi
