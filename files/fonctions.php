@@ -230,9 +230,9 @@ function utilisateur($conn){
         $result = $conn->query($sql);
         if($result->num_rows > 0){
             while($row = $result -> fetch_assoc()){
-                echo $row["utId"]."<br>";
-                echo $row["utMdP"]."<br>";
-                echo $row["utAdmin"]."<br>";
+                echo $row["utId"]."<br>"; // c'est le identifiant du utilisateur 
+                echo $row["utMdP"]."<br>"; // c'est le mot de passe 
+                echo $row["utAdmin"]."<br>"; // c'est un champ qui n'est pas utiliser pour le login (mais c'est pour apres)
             }
         }else echo "0 results" ; 
         
