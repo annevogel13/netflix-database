@@ -64,6 +64,11 @@ function recupereCategorieSelect(){
     }
 }
 
+/**
+ * /brief foction which generates the green box on the home page 
+ * /param $conn : the variable which stores the connection 
+ * /param $idCategorie : the variable which indicates which categorie we are going to display 
+ */
 function greenbox($conn, $idCategorie){
     if($idCategorie == "%"){
         $sql = "SELECT COUNT(nomFich) from `p1905532`.`Photo`"; 
@@ -72,11 +77,16 @@ function greenbox($conn, $idCategorie){
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
-            echo $row["COUNT(nomFich)"]; 
+            echo $row["COUNT(nomFich)"]; // to display the number of photo's in a category 
         }
     }else echo "0 results" ; 
 }
 
+
+/**
+ * /brief function who gets the informations on the page "ajoute photo" 
+ * /param $conn : stores the informations about the connection 
+ */
 function recupereNouvellePhoto($conn){ 
     $newNomFich = $newDescription = $newCateogrie = ''; 
    
@@ -107,14 +117,14 @@ function recupereNouvellePhoto($conn){
 
     $newPhotoId = random_int(500, 950); // genere une nouveaux photoId 
     
-    insertPhoto($conn, $newPhotoId, $newNomFich, $newDescription, $newCateogrie); 
+    insertPhoto($conn, $newPhotoId, $newNomFich, $newDescription, $newCateogrie); // inserts the photo into the database 
     
 }
 
 /**
- * @function function qui ajoute une photo dans le database 
- * @param $conn : connection
- * @param {string} $photoId, $nomFich, $description, $catId 
+ * /brief function function qui ajoute une photo dans le database 
+ * /param $conn : connection
+ * /param {string} $photoId, $nomFich, $description, $catId 
  */
 function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
     $sqlValues = "('".$photoId."', '".$nomFich."','".$description."','".$catId."')";  
@@ -130,7 +140,10 @@ function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
     } */ 
 }
 
-
+/**
+ * /brief function which uploads the photo to our /image repository 
+ * /param $conn : stores the informations about the connection 
+ */
 function ajoutePhoto($conn){
     /// upload image 
     if(isset($_POST['submit'])){
@@ -166,36 +179,40 @@ function ajoutePhoto($conn){
     }
 }
 
-    function recuperePhoto($conn, $idPhoto){
+function recuperePhoto($conn, $idPhoto){
         
-         $sql = "SELECT nomFich, description, catId FROM `p1905532`.`Photo` WHERE photoId = ".$idPhoto;
-        $result = $conn->query($sql);
-        if($result->num_rows > 0){
-            while($row = $result -> fetch_assoc()){
-                $url = "index.php?categorie=".$row['catId']; 
-                $nomCat = getCategorieFromCatId($conn, $row["catId"]); 
-                echo "<div class=\"col\">
-                        <table class=\"table table-bordered\">
-                            <tr>
-                                <th scope=\"row\">Description</th>
-                                <th>".$row["description"]."</th>
-                            </tr>
-                            <tr>
-                                <th scope=\"row\">Nom du fichier</th>
-                                <th>".$row["nomFich"]."</th>
-                            </tr>
-                            <tr>
-                                <th scope=\"row\">categorie</th>
-                                <th><a href='".$url."'>".$nomCat."</a></th>
-                            </tr>
-                        </table>
-                    </div> ";
-                    echo "<img src='../images/" . $row["nomFich"] . "' height=\"250px\" width=\"auto\">";
-                }
-        }else echo "0 results" ; 
-        
-    }
+    $sql = "SELECT nomFich, description, catId FROM `p1905532`.`Photo` WHERE photoId = ".$idPhoto;
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result -> fetch_assoc()){
+            $url = "index.php?categorie=".$row['catId']; 
+            $nomCat = getCategorieFromCatId($conn, $row["catId"]); 
+            echo "<div class=\"col\">
+                    <table class=\"table table-bordered\">
+                        <tr>
+                            <th scope=\"row\">Description</th>
+                            <th>".$row["description"]."</th>
+                        </tr>
+                        <tr>
+                            <th scope=\"row\">Nom du fichier</th>
+                            <th>".$row["nomFich"]."</th>
+                        </tr>
+                        <tr>
+                            <th scope=\"row\">categorie</th>
+                            <th><a href='".$url."'>".$nomCat."</a></th>
+                        </tr>
+                    </table>
+                </div> ";
+            echo "<img src='../images/" . $row["nomFich"] . "' height=\"250px\" width=\"auto\">";
+        }
+    }else echo "0 results" ;   
+}
 
+/**
+ * /brief fonction which returns the name of the category corresponding to the $catId 
+ * /param $conn : stores the information about the connection 
+ * /param $catId : number which indicates which category it is
+ */
 function getCategorieFromCatId($conn, $catId){
     $sql = "SELECT nomCat FROM `p1905532`.`Categorie` WHERE catId = ".$catId;
     $result = $conn->query($sql);
