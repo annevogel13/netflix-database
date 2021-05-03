@@ -40,8 +40,9 @@ function recuperePhotoCategorie($conn, $idCategorie){
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
-            $onclick = "genererPage('".$row["photoId"]."','".$row["nomFich"]."','".$row["description"]."','".$row["catId"]."')"; 
-            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage' onclick = \"".$onclick."\">";
+            $url = "photo.php?uploadsucces=".$row['photoId']; 
+            $onclick = "onclick = \"parent.location='".$url."'\""; 
+            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage' ".$onclick.">";
         }
     }else echo "0 results" ; 
     
@@ -82,19 +83,18 @@ function recupereNouvellePhoto($conn){
         if(!empty($_POST['inputCategorie'])) {
             if($_POST['inputCategorie'] === 'none'){
                 echo 'Please select a category.<br>'; // si il y a pas une categorie selectionnee 
-            }else $newCateogrie = $_POST['inputCategorie']; //echo $newCateogrie; 
+            }else $newCateogrie = $_POST['inputCategorie']; 
         } else {
             echo 'Please select a category.';
             echo '<br>';
         }
         
         if(!empty($_FILES['file'])) {
-            $newNomFich = $_FILES['file']['name'];; //echo $newNomFich;
+            $newNomFich = $_FILES['file']['name'];
             
         } else {
             echo 'Please select a file.<br>'; // si il y a pas une fichier selectionnee
         }
-        
         
         if(!empty($_POST['inputDescription'])) {
             if($_POST['inputDescription'] === ''){
@@ -102,7 +102,7 @@ function recupereNouvellePhoto($conn){
             }else $newDescription = $_POST['inputDescription'];
            // echo $newDescription;
         } else {
-            echo 'Please enter a description'; // si aucun descriptoin est saisi 
+            echo 'Please enter a description';  
         }
 
     $newPhotoId = random_int(500, 950); // genere une nouveaux photoId 
