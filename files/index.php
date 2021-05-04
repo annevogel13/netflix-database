@@ -49,7 +49,7 @@
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
                 </select>
-                <input type="submit" name="submit" value="Choici categorie">
+                <input type="submit" name="submit" value="Choisir la categorie">
             </form>
         </div>
         <h2>Tous</h2>

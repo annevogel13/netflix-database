@@ -30,7 +30,7 @@
             </div>
 
             <div>
-                <label for="inputDescription" class="form-label">Saisie une descriptoin</label> 
+                <label for="inputDescription" class="form-label">Saisie une description</label> 
                 <textarea class="form-control" rows="2" name="inputDescription"></textarea>
             </div>
             <div class="mb-3">
@@ -45,7 +45,7 @@
             <button class="btn btn-primary mt-3" type="submit" name="submit">UPLOAD</button>
         </form>
         <div class="mt-3">
-            <h3>Message des erreurs</h3>
+            <h3>Message(s) d'erreur(s)</h3>
             <?php   
                 // creation du connection 
                 $conn = createConnection($servername, $username, $password);
