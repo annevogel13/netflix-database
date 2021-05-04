@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Details</title>
+    <title>Cacher photo</title>
     <link rel="stylesheet" href="style.css">
     <script src="client.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -24,11 +24,19 @@
     </nav>
 
     <div class="mx-auto" style="width: 900px;">
-        <h1 class="mt-3">Delete photo</h1>
-        <h3 class="mt-3">Clique sur le photo que vous voulez supprimer?</h3> 
+        <h1 class="mt-3">Cacher photo</h1>
+        <h3 class="mt-3">Clique sur le photo que vous voulez cacher</h3> 
         <h6 class="mt-3">Apres recharge la page --> voire le resultat</h6>
 
+        <div>   
+        <h6>Photo visible</h6>    
+        </dvi>
 
+
+
+        <div>   
+        <h6>Photo cachees</h6>    
+        </dvi>
         <?php 
              
             if(!empty($_GET["id"])){

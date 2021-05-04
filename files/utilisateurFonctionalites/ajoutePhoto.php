@@ -20,6 +20,7 @@
         <a class="navbar-brand" href="../index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
+        <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
     </nav>
 
     <div class="mx-auto" style="width: 500px;">
