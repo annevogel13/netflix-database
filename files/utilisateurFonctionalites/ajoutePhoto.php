@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Details</title>
+    <title>Ajoute photo</title>
     <link rel="stylesheet" href="style.css">
     <script src="client.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

@@ -24,7 +24,7 @@ function createConnection($servername, $username, $password)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "The database is online<br>";
+    echo "Le base de donnee est accesible<br>";
     return $conn;
 }
 
@@ -33,10 +33,10 @@ function createConnection($servername, $username, $password)
  * /param $conn : pour utiliser le connection avec le base de donnee
  * /param $idCategorie : identifiant d'une categorie (1/2/3)
  */
-function recuperePhotoCategorie($conn, $idCategorie){
+function recuperePhotoCategorie($conn, $idCategorie, $cacher){
     if($idCategorie == "%"){
         $sql = "SELECT nomFich, photoId, description, catId from `p1905532`.`Photo`"; 
-    }else $sql = "SELECT nomFich, photoId, description, catId FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie;
+    }else $sql = "SELECT nomFich, photoId, description, catId FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie." AND cacher =".$cacher ;
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){

@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
-        <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
+        <a class="nav-link" href="./utilisateurFonctionalites/cacherPhoto.php">Ajoute Photo</a>
         <a class="nav-link" href="./login.php">Login</a>
     </nav>
 
@@ -54,7 +54,8 @@
         </div>
         <h2>Tous</h2>
         <?php 
-               recuperePhotoCategorie($conn, $selected);
+
+               recuperePhotoCategorie($conn, $selected, 0); // display all the photo's which are not "cacher"
                
                 
             $conn->close(); 

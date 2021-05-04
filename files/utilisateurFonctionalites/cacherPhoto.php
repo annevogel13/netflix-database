@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="fr">
 
-
 <head>
     <meta charset="utf-8">
     <title>Cacher photo</title>
@@ -28,22 +27,25 @@
         <h3 class="mt-3">Clique sur le photo que vous voulez cacher</h3> 
         <h6 class="mt-3">Apres recharge la page --> voire le resultat</h6>
 
-        <div>   
+        <div style="background-color : pink; ">    
         <h6>Photo visible</h6>    
-        </dvi>
-
-
-
-        <div>   
-        <h6>Photo cachees</h6>    
-        </dvi>
         <?php 
              
-            if(!empty($_GET["id"])){
-                $utId = $_GET["id"];
-                recuperePhotosUtilisateur($conn, $utId);
-            }else echo "login error";  
-            
+             if(!empty($_GET["id"])){
+                 $utId = $_GET["id"];
+                 recuperePhotosUtilisateur($conn, $utId, $cacher);
+             }else echo "login error";  
+         ?>
+        </div>
+
+        
+
+        <div style="background-color : rgb(155, 255, 189);">   
+        <h6>Photo cachees</h6>    
+        </div>
+
+          
+          <?php
             if(!empty($_GET["delete"])){
                 $photoDelete = $_GET["delete"];
                 echo "<script>alert(\" Vous avez supprimer : ".$photoDelete."\")</script>"; 
