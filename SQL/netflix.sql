@@ -26,7 +26,8 @@ CREATE TABLE Photo (
     nomFich VARCHAR (250) NOT NULL,
     description VARCHAR(250) NOT NULL,
     catId int NOT NULL, 
-    utId VARCHAR (250) NOT NULL, 
+    utId VARCHAR (250) NOT NULL, /* utlisateur , admin */ 
+    cacher INT NOT NULL, /* 0 --> pas cacher, 1 --> cacher*/ 
     PRIMARY KEY (photoId),
     FOREIGN KEY (catId) REFERENCES Categorie(catId),
     FOREIGN KEY (utID) REFERENCES Utilisateur(utId)

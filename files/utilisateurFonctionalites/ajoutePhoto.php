@@ -17,7 +17,7 @@
 
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
-        <a class="navbar-brand" href="./index.php">Accueil</a>
+        <a class="navbar-brand" href="../index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
     </nav>
