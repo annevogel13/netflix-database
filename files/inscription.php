@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once 'fonctions/bd.php';
-    require_once 'fonctions/utilisateur.php';
+    require_once 'bd.php';
+    require_once 'utilisateur.php';
 
     $stateMsg = "";
 
@@ -34,9 +34,17 @@
         <meta charset="utf-8">
         <title>Premi&egrave;re inscription</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <div class="loginBanner">
+    <nav class="navbar" style="background-color: paleturquoise;">
+        <a class="navbar-brand" href="./index.php">Accueil</a>
+        <a class="nav-link" href="./ajoutePhoto.html">Ajoute Photo</a>
+        <a class="nav-link" href="./login.php">Login</a>
+    </nav>
+
+        <div  class="mx-auto" style="width: 500px;">
             <div class="errorMsg"><?php echo $stateMsg; ?></div>
             <form action="inscription.php" method="POST">
                 <table>
@@ -48,7 +56,7 @@
                 </table>
             </form>
             
-            <a href="index.php">D&eacute;j&agrave; inscrit?</a>
+            <a href="login.php">D&eacute;j&agrave; inscrit?</a>  <!-- deja inscrit -> vais au page login --> 
         </div>
     </body>
 </html>

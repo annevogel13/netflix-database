@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include 'bd.php';
@@ -29,37 +28,11 @@ if(isset($_GET["subscribe"])){
 
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Bienvenue </title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-    <div class="loginBanner">
-    <div class="errorMsg"><?php echo $stateMsg; ?></div>
-    <?php if(isset($successMsg)){echo $successMsg;} ?>
-        <form action="index.php" method="POST">
-            <table>
-                <tr><td class="loginInfo">Pseudo:</td><td><input type="text" name="pseudo"></td></tr>
-                <tr><td class="loginInfo">Mot de passe:</td><td><input type="password" name="mdp"></td></tr>
-                <br/>
-                <tr><td><input class="button" type="submit" name="valider" value="Se connecter">
-            </table>
-        </form>
-        <a class="loginInfo" href="inscription.php">Premi&egrave;re connexion?</a>
-    </div>
-</body>
-</html>
-
-<!--<!doctype html>
-<html lang="fr">
 
 <head>
     <meta charset="utf-8">
-    <title>Details</title>
+    <title>Login </title>
     <link rel="stylesheet" href="style.css">
-    <script src="client.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -71,29 +44,30 @@ if(isset($_GET["subscribe"])){
         <a class="nav-link" href="./login.php">Login</a>
     </nav>
 
-    
-    <div class="login">
-        <h3 class="margin: 10px;">Login </h3>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Identifiant</span>
-            </div>
-            <input type="text" aria-label="Identifiant" class="form-control">
+    <div class="mx-auto" style="width: 500px;">
+        <div class="errorMsg">
+            <?php echo $stateMsg; ?>
         </div>
-
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Mot de passe</span>
-            </div>
-            <input type="text" aria-label="motDePasse" class="form-control">
-        </div>
-        
-        <button type="button" class="btn btn-primary" onclick="location.href='./ajoutePhoto.html'">Se connecter</button>
+        <?php if(isset($successMsg)){echo $successMsg;} ?>
+        <form action="index.php" method="POST">
+            <table  class="mt-3">
+                <!-- pas obligatoire nessesaite de faire une tablaux  -->
+                <tr>
+                    <td class="loginInfo">Pseudo:</td>
+                    <td><input type="text" name="pseudo"></td>
+                </tr>
+                <tr>
+                    <td class="loginInfo">Mot de passe:</td>
+                    <td><input type="password" name="mdp"></td>
+                </tr>
+            </table>
+                <br />
+               
+                    <input class="btn btn-primary" type="submit" name="valider" value="Se connecter">
+            
+        </form>
+        <a class="loginInfo" href="inscription.php">Premi&egrave;re connexion?</a>
     </div>
-
 </body>
 
-</html> -->
-
-
-
+</html>

@@ -1,19 +1,15 @@
 <?php
-
-
-
-    
     if(isset($_Post['utilisateur'])){
         $dbUser = $_POST['utilisateur'];
         $dbPwd = $_POST['password'];
         session_start();
 
-        $dbHost = "localhost";
-        $dbUser = "p1906670";
-        $dbPwd = "Prison27Suffix";
+        $servername = "localhost";
+        $username = "p1905532";
+        $password = "Shrill87Pebble";
         $dbName = "p1906670";
 
-        mysqli_connect($dbHost, $dbUser, $dbPwd);
+        mysqli_connect($servername, $username, $password);
         mysqli_select_db($dbName);
        
         $dbUser = ereg_replace("[^A-Za-z0-9]", $dbUser);
@@ -21,9 +17,9 @@
 
         $dbPwd = shal($dbPwd);
 
-        $query = mysqli_query("SELECT * FROM membres WHERE utilisateur = '$dbUser' LIMIT 1");
+        $query = mysqli_query("SELECT * FROM Utilisateur WHERE utId = '$dbUser' LIMIT 1");
         $total = mysqli_num_rows($query);
-
+        echo $total; 
         if($total = "0"){
             echo "L'utilisateur n'existe pas";
             exit();
@@ -37,7 +33,7 @@
             }
             else {
                 $_SESSION['utilisateur']= $dbUser;
-                header("location:".$_SERVER['HTTP_REFERER']);
+               // header("location:".$_SERVER['HTTP_REFERER']);
 
 
             }
@@ -45,7 +41,7 @@
         }
 
     }
-    else{header("location: index.php");
+    else{ //header("location: index.php");
     }
 
     session_destroy();

@@ -26,7 +26,7 @@
     <div id="greenbox" class="greenbox">
         
         <?php 
-        utilisateur($conn); 
+        //utilisateur($conn); 
         $selected = recupereCategorieSelect();
                 if($selected === null){
                     if(!empty($_GET["categorie"])){
