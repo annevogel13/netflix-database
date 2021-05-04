@@ -1,6 +1,6 @@
 
 <?php 
-include 'fonctions.php' ;
+include '../fonctions.php' ;
 
 // creation du connection 
 $conn = createConnection($servername, $username, $password);

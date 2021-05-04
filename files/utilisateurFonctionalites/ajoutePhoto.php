@@ -1,5 +1,6 @@
-<?php include 'fonctions.php' 
-    
+<?php include '../fonctions.php' ;
+    // creation du connection 
+    $conn = createConnection($servername, $username, $password);
 ?>
 <!doctype html>
 <html lang="fr">
@@ -18,7 +19,7 @@
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
-        <a class="nav-link" href="./login.php">Login</a>
+        <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
     </nav>
 
     <div class="mx-auto" style="width: 500px;">
@@ -47,8 +48,7 @@
         <div class="mt-3">
             <h3>Message(s) d'erreur(s)</h3>
             <?php   
-                // creation du connection 
-                $conn = createConnection($servername, $username, $password);
+                
                 // upload image + ajoute photo aux data base
                 ajoutePhoto($conn); 
             ?>
