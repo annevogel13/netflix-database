@@ -166,7 +166,7 @@ function ajoutePhoto($conn){
     
         if(in_array($fileActualExt, $allowed)){ // extension is allowed
             if($fileError === 0 ){ // if 0 --> no errors 
-                if($fileSize <  800000){ // taille of image max = 100 ko = 100 * 8 o = 800000      
+                if($fileSize <  100000){ // taille of image max = 100 ko = 100 * 8 o = 800000      
                     $fileDestination = '../images/'.$fileFirstName.".".$fileActualExt; // place where it's going to be
                    // echo "tmp Name : ".$fileTmpName."<br>";
                   //  echo "destination : ".$fileDestination."<br>"; 
