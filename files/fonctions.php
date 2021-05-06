@@ -135,7 +135,7 @@ function insertPhoto($conn, $photoId, $nomFich, $description, $catId){
     
     if($conn -> query($sql) === TRUE){
         echo "Nouvelle photo ajoute dans le database"; 
-        header("Location: index.php?ajout=succes");
+        header("Location: ../index.php?ajout=succes");
 
     } /*else {
         echo "Error: ".$sql."<br>".$conn->error; 

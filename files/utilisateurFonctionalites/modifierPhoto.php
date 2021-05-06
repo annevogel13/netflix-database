@@ -1,4 +1,4 @@
-<?php include '../fonctions.php' ;
+<?php include '../fonctions.php' ; // needs to be file which has a start_session() and has a session value which stores the utId 
     // creation du connection 
     $conn = createConnection($servername, $username, $password);
 ?>
@@ -22,8 +22,11 @@
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
     </nav>
 
-    <div class="mx-auto" style="width: 600px;">
+    <div class="mx-auto" style="width: 800px;">
         <h1 class="mt-3"> Les images </h1>
+        <h5>Selection l'image que vous voulez changer. Et direcement apres saisi les nouvelle données dans les champs. 
+            Si le modification est pris en charge, il afficherai une message. 
+        </h5>
         <form action="" method="POST">
             <div>
             <?php
@@ -43,7 +46,7 @@
                         <option value="3">dramas</option>
                     </select>
             </div>
-            <button class="btn btn-primary mt-3" type="submit" name="modifierSasie">modifier</button>
+            <button class="btn btn-primary mt-1" type="submit" name="modifierSasie">Modifier les données</button>
         </form>
     </div>
     <h3>
@@ -71,7 +74,6 @@
 
     }
 
-
     function recupereChangements($conn, $utId){ // gets the information from the table and calls the fonction which replaces the values 
         
         if(isset($_POST['modifierSasie'])){ // get the form --> by clicking on the button 
@@ -88,7 +90,7 @@
                 }
                 
                 modifierPhoto($conn, $utId, $photoId, $cat, $descr); 
-            }
+            }else echo "Vous devriez selectionner une photo avec le button à côte d'une image.";
         }
     }
 
