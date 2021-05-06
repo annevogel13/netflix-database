@@ -25,9 +25,9 @@
 
     <div class="mx-auto" style="width: 600px;">
         <h1 class="mt-3"> Statistiques </h1>
-
+        <br>
         <h5>Tableau avec informations generales</h5>
-        <table>
+        <table class="table">
             <tr>
                 <th>Nombre d'utlisateurs : </th>
                 <th class="pl-2"><?php  $sql1 = "SELECT COUNT(utId) from `p1905532`.`Utilisateur`" ; exuteEchoSQL($conn, $sql1, "COUNT(utId)");?></th>
@@ -52,7 +52,9 @@
                 <th>Categorie comedy</th>
                 <th>Categorie drama</th> 
             </tr>
-        <?php tableStatsUser($conn) ?> 
+            
+            <?php tableStatsUser($conn) ?> 
+                
         </table> 
     
     </div>
@@ -74,6 +76,7 @@
         }
 
         function tableStatsUser($conn){
+            echo "<tbody class=\"table\">"; 
                 // select all users and execute statsUser() for every one 
                 $sql = "SELECT utId FROM `p1905532`.`Utilisateur`"; 
                 $resultat= $conn->query($sql); 
@@ -82,6 +85,7 @@
                         statsUser($conn, $row["utId"]);
                     } 
                 }
+            echo "</tbody>"; 
         }
 
         function statsUser($conn, $utId){
