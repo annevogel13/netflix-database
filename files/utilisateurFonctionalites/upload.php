@@ -2,7 +2,7 @@
 <?php 
 include '../fonctions.php' ;
 
-// creation du connection 
+// creation du connexion 
 $conn = createConnection($servername, $username, $password);
 // upload image + ajoute photo aux data base
 ajoutePhoto($conn); 

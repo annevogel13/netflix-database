@@ -9,7 +9,7 @@ if(isset($_POST["valider"])){
     $pseudo = $_POST["pseudo"];
     $hashMdp = md5($_POST["mdp"]);
     
-    $link = getConnection($dbHost, $dbUser, $dbPwd, $dbName);
+    $link = getConnection($servername, $username, $password, $dbName);
     
     $exist = getUser($pseudo, $hashMdp, $link);
     if($exist){
