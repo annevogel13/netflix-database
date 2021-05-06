@@ -80,12 +80,7 @@
                 remplaceCacherDansPhoto($conn, $utId, $photoId, 1 );
                 header("cacher.php?id='".$utId."'"); 
                // recuperePhotosUtilisateur($conn, $utId, 0);
-            }
-
-          
-
-           
-            
+            }            
             
         ?>
 
