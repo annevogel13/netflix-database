@@ -27,27 +27,15 @@
         <h1 class="mt-3"> Les images </h1>
         <form action="" method="POST">
             <div>
-        <?php
-            $utId = 'p19055555';
-            recuperePhotosUtilisateur($conn, $utId);
-            
-        
-        ?>
-            </div>
-         <button class="btn btn-success mt-3" type="submit" name="modifier"> Modifie le photos qui est selectionée</button>
-        </form>
-        <?php 
-            recuperePhotoAChanger($conn, $utId);  
-            
+            <?php
+                $utId = 'p19055555';
+                recuperePhotosUtilisateur($conn, $utId);
             ?>
-
-            <form action="" method="POST">
-            
-                <div>
-                    <label for="modDescription">Si vous voulez changer le description saisi ici</label>
-                    <textarea class="form-control" rows="2" name="modDescription"></textarea>
-                </div>
-                <div class="mb-3">
+            <div>
+                <label for="modDescription">Si vous voulez changer le description saisi ici</label>
+                <textarea class="form-control" rows="2" name="modDescription"></textarea>
+            </div>
+            <div class="mb-3">
                     <label for="modCategorie">Si vous voulez changer le category saisi ici</label>
                     <select name="modCategorie" class="form-control" required>
                         <option value="none">choisir une cateagorie</option>
@@ -55,11 +43,17 @@
                         <option value="2">comedy</option>
                         <option value="3">dramas</option>
                     </select>
-                </div>
-                <button class="btn btn-primary mt-3" type="submit" name="modifierSasie">modifier</button>
-            </form> 
-        <div>  
-            <?php   
+            </div>
+            <button class="btn btn-primary mt-3" type="submit" name="modifierSasie">modifier</button>
+        </form>
+    </div>
+    
+    <?php  recupereChangements($conn, $utId);  ?>
+    </body>
+
+</html>    
+
+    <?php
                 
                 function recuperePhotosUtilisateur($conn, $utId){
                     $sql = "SELECT utId, nomFich, photoId FROM  `p1905532`.`Photo` WHERE utId ='".$utId."'"; 
@@ -78,34 +72,27 @@
 
                 }
 
-                function recuperePhotoAChanger($conn, $utId){
-                    $photoId = ''; 
-                    if(isset($_POST['modifier'])){  // get the photo which we need to change 
-                        if(!empty($_POST['radio'])){ // check if its empty 
-                                echo "Vous voulez modifier le catégorie ou/et le description du ".$_POST['radio']."?"; // show a message for the user 
-                                $photoId = $_POST['radio']; 
-                                
-                        } 
-                    }
-                    echo $photoId; 
-                    recupereChangements($conn, $utId, $photoId);  
-                }
 
-                function recupereChangements($conn, $utId, $photoId){
+                function recupereChangements($conn, $utId){
                     
-                    $descr = $cat = ""; 
+                    
                     if(isset($_POST['modifierSasie'])){
-                        if(!empty($_POST['modDescription'])){
-                            $descr = $_POST['modDescription']; 
-                            //echo $descr; 
-                        }
+                        if(!empty($_POST['radio'])){
+                            $photoId = $_POST['radio']; 
+                            $descr = $cat = ""; 
 
-                        if(!empty($_POST['modCategorie'])){
-                            $cat = $_POST['modCategorie']; 
-                          //  echo $cat; 
+                            if(!empty($_POST['modDescription'])){
+                                $descr = $_POST['modDescription']; 
+                                //echo $descr; 
+                            }
+
+                            if(!empty($_POST['modCategorie'])){
+                                $cat = $_POST['modCategorie']; 
+                            //  echo $cat; 
+                            }
+                            
+                            modifierPhoto($conn, $utId, $photoId, $cat, $descr); 
                         }
-                        
-                        modifierPhoto($conn, $utId, $photoId, $cat, $descr); 
                     }
                 }
 
@@ -140,16 +127,7 @@
                         }
                     }
                 }
-                    
-                    
-
-                    
+                       
                 
             ?>
-       </div>
-    </div> 
-
-
-</body>
-
-</html>
+  
