@@ -7,6 +7,7 @@ $servername = "localhost";
 $username = "p1905532";
 $password = "Shrill87Pebble";
 
+// `p1905532`.`utilisateur`
 
 /**
  * /brief fonction qui permet de connecte avec le base de donee
