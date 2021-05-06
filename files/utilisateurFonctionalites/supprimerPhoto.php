@@ -1,3 +1,7 @@
+<?php 
+        include '../fonctions.php';
+        $conn = createConnection($servername, $username, $password);
+    ?>
 <!doctype html>
 <html lang="fr">
 
@@ -11,10 +15,6 @@
 </head>
 
 <body>
-    <?php 
-        include '../fonctions.php';
-        $conn = createConnection($servername, $username, $password);
-    ?>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="../index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
@@ -32,54 +32,56 @@
                     <?php 
            
                         if(!empty($_GET["id"])){
-                            $utId = $_GET["id"];
+                            $utId = $_GET["id"]; // get the id of the user (lack of session variable )
 
-                            recuperePhotosUtilisateur($conn, $utId);
-                            formDelete($conn, $utId); 
+                            recuperePhotosUtilisateur($conn, $utId); // collects all the photo's of the $utId (certain user)
+                            formDelete($conn, $utId); // collects the photos that need to be deleted in an array and executes the sql command 
 
-                        }else echo "login error";  
+                        }else echo "login error";  // if there isn't a $utId defined, shows login error 
                     ?>
                 </div>
                 <button class="btn btn-danger mt-3" type="submit" name="supprimer">Supprime les photos selectionees</button>
             </form>
         </div>
-        <?php
-
-            function formDelete($conn, $utId){
-
-                if(isset($_POST['supprimer'])){
-                   if(!empty($_POST['photosSupprimer'])){
-                       foreach($_POST['photosSupprimer'] as $nomFich){ 
-                            supprimerPhoto($conn, $utId, $nomFich); 
-                            header("Location: ./supprimerPhoto1.php?id=".$utId);
-                        }
-                    }  
-                }
-            }
-
-            function supprimerPhoto($conn, $utId, $nomFich){
-                $sql = "DELETE FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND nomFich ='".$nomFich."'" ; 
-                $result = $conn->query($sql);
-            }
-
-            function recuperePhotosUtilisateur($conn, $utId){
-                $sql = "SELECT utId, nomFich, photoId FROM  `p1905532`.`Photo` WHERE utId ='".$utId."'"; 
-                $result = $conn->query($sql);
-                if($result->num_rows > 0){
-                    $id = 0 ; 
-                    while($row = $result -> fetch_assoc()){
-                        
-                        $photoId = $row["photoId"];
-                        $img = "<img src='../../images/" . $row["nomFich"] . "' class='singleImage'>"; 
-                        echo $img."<input type=\"checkbox\" id=\"".$row["nomFich"]."\" name='photosSupprimer[]' value=\"".$row["nomFich"]."\">"; 
-                        $id++;  
-                    }
-                }
-            }
-            
-        ?>
-
     </div>
-
+       
 </body>
 </html>
+<?php
+
+    function formDelete($conn, $utId){ // fonction which handels the form and the commands to the sql database 
+
+        if(isset($_POST['supprimer'])){
+            if(!empty($_POST['photosSupprimer'])){
+                foreach($_POST['photosSupprimer'] as $nomFich){  // it's an array, the foreach allows us to tread element for element 
+                    supprimerPhoto($conn, $utId, $nomFich); // calls the fonction which deletes a photo which has the same $utId and $nomFich 
+                    header("Location: ./supprimerPhoto1.php?id=".$utId); // redirect to the "page d'accueil" so that the photo can be seen
+                }
+            }  
+        }
+    }
+
+    function supprimerPhoto($conn, $utId, $nomFich){ // fonction which deletes an row from a table whith utId = $utId , nomFich = $nomFich ;
+        $sql = "DELETE FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND nomFich ='".$nomFich."'" ; 
+        $result = $conn->query($sql);
+    }
+
+    function recuperePhotosUtilisateur($conn, $utId){ // fonction which collects all the photos from one user 
+        $sql = "SELECT utId, nomFich, photoId FROM  `p1905532`.`Photo` WHERE utId ='".$utId."'"; 
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            $id = 0 ; 
+            while($row = $result -> fetch_assoc()){
+                
+                $photoId = $row["photoId"];
+                $img = "<img src='../../images/" . $row["nomFich"] . "' class='singleImage'>"; // stores the html code for an image 
+                // concat the $img and the rest of the html code for an input type checkbox 
+                echo $img."<input type=\"checkbox\" id=\"".$row["nomFich"]."\" name='photosSupprimer[]' value=\"".$row["nomFich"]."\">"; 
+                $id++;  
+            }
+        }
+    }
+    
+?>
+
+
