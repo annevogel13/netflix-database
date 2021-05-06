@@ -1,3 +1,8 @@
+<?php 
+        include '../fonctions.php';
+        include 'cacher.php'; // a lot of fonctions, easier to implement them in a seperate file 
+        $conn = createConnection($servername, $username, $password);
+    ?>
 <!doctype html>
 <html lang="fr">
 
@@ -11,11 +16,7 @@
 </head>
 
 <body>
-    <?php 
-        include '../fonctions.php';
-        include 'cacher.php';
-        $conn = createConnection($servername, $username, $password);
-    ?>
+  
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="../index.php">Accueil</a>
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
@@ -37,7 +38,7 @@
                         if(!empty($_GET["id"])){
                             $utId = $_GET["id"];
 
-                            formCacher($conn, $utId); 
+                            formCacher($conn, $utId);  // creates the html code to display a form for the photos which are public
 
                         }else echo "login error";  
                     ?>
@@ -51,9 +52,9 @@
                 <div>
                     <?php
                     if(!empty($_GET["id"])){
-                        $utId = $_GET["id"];
+                        $utId = $_GET["id"]; // needs to be session value 
 
-                        formAfficher($conn, $utId); 
+                        formAfficher($conn, $utId); // creates the html code to display a form for the photos which are hidden
 
                     }else echo "login error";  
                     ?>
@@ -62,31 +63,6 @@
             </div>
             </form>
         </div>
-
-        <?php
-            if(!empty($_GET["delete"])){
-                $photoDelete = $_GET["delete"];
-                echo "<script>alert(\" Vous avez supprimer : ".$photoDelete."\")</script>"; 
-                supprimerPhoto($conn, $utId, $photoDelete); 
-                if(!empty($_GET["fichier"])){
-                    $photoId =  $_GET["fichier"]; 
-                    remplaceCacherDansPhoto($conn, $utId, $photoId, 0);
-                }
-               
-            }
-
-            if(!empty($_GET["fichier"])){
-                $photoId =  $_GET["fichier"]; 
-                remplaceCacherDansPhoto($conn, $utId, $photoId, 1 );
-                header("cacher.php?id='".$utId."'"); 
-               // recuperePhotosUtilisateur($conn, $utId, 0);
-            }            
-            
-        ?>
-
     </div>
-
-
 </body>
-
 </html>

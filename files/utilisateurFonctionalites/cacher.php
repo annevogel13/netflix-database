@@ -1,7 +1,6 @@
 <?php 
 
 
-
 function formCacher($conn, $utId){
     if(!empty($_GET["id"])){
         $utId = $_GET["id"];
@@ -11,7 +10,7 @@ function formCacher($conn, $utId){
         if(isset($_POST['cacher'])){
            if(!empty($_POST['photos'])){
                foreach($_POST['photos'] as $photoId){
-                  // echo "value : ".$photoId."<br>"; 
+                   
                    remplaceCacherDansPhoto($conn, $utId, $photoId , 1);
                    header("Location: ./cacherPhoto.php?id=".$utId);
                }
@@ -30,7 +29,7 @@ function formAfficher($conn, $utId){
         if(isset($_POST['afficher'])){
            if(!empty($_POST['photos'])){
                foreach($_POST['photos'] as $photoId){
-                   //echo "value : ".$photoId."<br>"; 
+                   
                    remplaceCacherDansPhoto($conn, $utId, $photoId , 0);
                    header("Location: ./cacherPhoto.php?id=".$utId);
                }
