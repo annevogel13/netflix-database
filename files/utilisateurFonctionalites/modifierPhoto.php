@@ -5,7 +5,6 @@
 <!doctype html>
 <html lang="fr">
 
-
 <head>
     <meta charset="utf-8">
     <title>Ajoute photo</title>
@@ -28,15 +27,15 @@
         <form action="" method="POST">
             <div>
             <?php
-                $utId = 'p19055555';
-                recuperePhotosUtilisateur($conn, $utId);
+                $utId = 'p19055555'; // needs to be session value 
+                recuperePhotosUtilisateur($conn, $utId); // show all the images of the user with radio buttons 
             ?>
             <div>
                 <label for="modDescription">Si vous voulez changer le description saisi ici</label>
                 <textarea class="form-control" rows="2" name="modDescription"></textarea>
             </div>
             <div class="mb-3">
-                    <label for="modCategorie">Si vous voulez changer le category saisi ici</label>
+                    <label for="modCategorie">Si vous voulez changer le categorie saisi ici</label>
                     <select name="modCategorie" class="form-control" required>
                         <option value="none">choisir une cateagorie</option>
                         <option value="1">fantasy</option>
@@ -47,87 +46,82 @@
             <button class="btn btn-primary mt-3" type="submit" name="modifierSasie">modifier</button>
         </form>
     </div>
-    
-    <?php  recupereChangements($conn, $utId);  ?>
+    <h3>
+        <?php  recupereChangements($conn, $utId); // get the informations of the form, and calls the fontion which updates the tabel ?>
+    </h3>
     </body>
 
 </html>    
 
-    <?php
+<?php
+            
+    function recuperePhotosUtilisateur($conn, $utId){ // shows all the images with radiobuttons (<-- always within a <form></form>)
+        $sql = "SELECT utId, nomFich, photoId FROM  `p1905532`.`Photo` WHERE utId ='".$utId."'"; 
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){ 
+            while($row = $result -> fetch_assoc()){
+
+                $photoId = $row["photoId"];
+                // create the html code to show the image 
+                $img = "<img src='../../images/" . $row["nomFich"] . "' class='singleImage'>"; 
+                // create a radio button
+                echo $img."<input type=\"radio\" id=\"".$row["nomFich"]."\" name=\"radio\" value=\"".$row["photoId"]."\">"; 
+            }
+        }
+
+    }
+
+
+    function recupereChangements($conn, $utId){ // gets the information from the table and calls the fonction which replaces the values 
+        
+        if(isset($_POST['modifierSasie'])){ // get the form --> by clicking on the button 
+            if(!empty($_POST['radio'])){ // get the photoId 
+                $photoId = $_POST['radio']; 
+                $descr = $cat = "none"; // these default values will help later in the code 
+
+                if(!empty($_POST['modDescription'])){ // get the new description 
+                    $descr = $_POST['modDescription']; 
+                }
+
+                if(!empty($_POST['modCategorie'])){ // get the new categorie id
+                    $cat = $_POST['modCategorie']; 
+                }
                 
-                function recuperePhotosUtilisateur($conn, $utId){
-                    $sql = "SELECT utId, nomFich, photoId FROM  `p1905532`.`Photo` WHERE utId ='".$utId."'"; 
-                    $result = $conn->query($sql);
-                    if($result->num_rows > 0){
-                        $id = 0 ; 
-                        while($row = $result -> fetch_assoc()){
-                            
-                            $photoId = $row["photoId"];
-                            $img = "<img src='../../images/" . $row["nomFich"] . "' class='singleImage'>"; 
-                            
-                            echo $img."<input type=\"radio\" id=\"".$row["nomFich"]."\" name=\"radio\" value=\"".$row["photoId"]."\">"; 
-                            $id++;  
-                        }
-                    }
-
-                }
+                modifierPhoto($conn, $utId, $photoId, $cat, $descr); 
+            }
+        }
+    }
 
 
-                function recupereChangements($conn, $utId){
-                    
-                    
-                    if(isset($_POST['modifierSasie'])){
-                        if(!empty($_POST['radio'])){
-                            $photoId = $_POST['radio']; 
-                            $descr = $cat = ""; 
-
-                            if(!empty($_POST['modDescription'])){
-                                $descr = $_POST['modDescription']; 
-                                //echo $descr; 
-                            }
-
-                            if(!empty($_POST['modCategorie'])){
-                                $cat = $_POST['modCategorie']; 
-                            //  echo $cat; 
-                            }
-                            
-                            modifierPhoto($conn, $utId, $photoId, $cat, $descr); 
-                        }
-                    }
-                }
-
-
-                function modifierPhoto($conn, $utId, $photoId , $cat, $descr){
-                    echo "photo ID : ".$photoId; 
-                    $sql = "SELECT * FROM `p1905532`.`Photo` WHERE photoId =".$photoId." AND utId = '".$utId."'" ;
-                    echo $sql; 
-                    $result = $conn->query($sql);
-                    if($result->num_rows > 0){
-                        while($row = $result -> fetch_assoc()){
-                            
-                        $sql1 = "REPLACE INTO `p1905532`.`Photo` SET "; 
-                            $l1 = "photoId ='".$photoId."',";
-                            $l2 = "nomFich ='".$row["nomFich"]."',";
-
-                            echo $cat." ".$descr; 
-                            $l3 = $l4 = ""; // initialize before the loop so that it exists after
-                            if(isset($descr)){
-                                $l3 = "description ='".$descr."',";
-                            }else $l3 = "description ='".$row["description"]."',";
-                           
-                            if(isset($cat)){
-                                $l4 = "catId =".$cat.",";
-                            }else $l4 = "catId =".$row["catId"].",";
-                            
-                            $l5 = "utId ='".$row["utId"]."',"; 
-                            $l6 = "cacher = ".$row["cacher"]; 
-                            $sql1 = $sql1.$l1.$l2.$l3.$l4.$l5.$l6; 
-                            echo $sql1; 
-                            $result2 = $conn->query($sql1);
-                        }
-                    }
-                }
-                       
+    function modifierPhoto($conn, $utId, $photoId , $cat, $descr){
+        // get all information from the table photo 
+        $sql = "SELECT * FROM `p1905532`.`Photo` WHERE photoId =".$photoId." AND utId = '".$utId."'" ; 
+        
+        $result = $conn->query($sql);
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+             // create the sql syntax for replacing information   
+            $sql1 = "REPLACE INTO `p1905532`.`Photo` SET "; 
+                $l1 = "photoId ='".$photoId."',";
+                $l2 = "nomFich ='".$row["nomFich"]."',";
                 
-            ?>
+                $l3 = $l4 = ""; // initialize before the if-statements so that it exists after
+                if($descr !== "none"){ // if there is text in the textarea --> replace 
+                    $l3 = "description ='".$descr."',";
+                }else $l3 = "description ='".$row["description"]."',"; // else keep the old information
+                
+                if($cat !== "none"){ // if there is a category selected 
+                    $l4 = "catId =".$cat.",";
+                }else $l4 = "catId =".$row["catId"].","; // else keep the old information 
+                
+                $l5 = "utId ='".$row["utId"]."',"; 
+                $l6 = "cacher = ".$row["cacher"]; 
+                $sql1 = $sql1.$l1.$l2.$l3.$l4.$l5.$l6;  // add all the little pieces together 
+
+                echo "Votre modification est bien pris en compte"; // message to inform the user that everything is going okay 
+                $result2 = $conn->query($sql1); // execute the command in the table 
+            }
+        }
+    }              
+?>
   
