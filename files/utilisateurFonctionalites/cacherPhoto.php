@@ -25,8 +25,8 @@
 
     <div class="mx-auto" style="width: 900px;">
         <h1 class="mt-3">Cacher photo</h1>
-        <h5 class="mt-3">Si tu veux cacher ou de remis la photo sur visible, clique sur le "checkbox" et clique sur le bouton correspondant</h5>
-        <h6 class="mt-3">Apres clique sur le "cacher photo" dans le "nav-bar" -> voire le resultat</h6>
+        <h5 class="mt-3">Si tu veux cacher ou de remettre la photo sur visible, clique sur le "checkbox" et clique sur le bouton correspondant</h5>
+        <h6 class="mt-3">Apres clique sur "cacher photo" dans le "nav-bar" -> voir le resultat</h6>
 
         <div class="p-5" style="background-color: #9eff84;">
             <h3>Photo visible</h3>

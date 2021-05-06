@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="../index.php">Accueil</a>
-        <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
+        <a class="nav-link" href="./ajoutePhoto.php">Ajouter Photo</a>
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
     </nav>
@@ -32,7 +32,7 @@
             </div>
 
             <div>
-                <label for="inputDescription" class="form-label">Saisie une description</label> 
+                <label for="inputDescription" class="form-label">Saisir une description</label> 
                 <textarea class="form-control" rows="2" name="inputDescription"></textarea>
             </div>
             <div class="mb-3">

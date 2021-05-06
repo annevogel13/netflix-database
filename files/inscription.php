@@ -10,7 +10,7 @@
         $hashMdp = md5($_POST["mdp"]);
         $hashConfirmMdp = md5($_POST["confirmMdp"]);
         
-        $link = getConnection($dbHost, $dbUser, $dbPwd, $dbName);
+        $link = getConnection($servername, $username, $password, $dbName);
         
         $available = checkAvailability($pseudo, $link);
         
