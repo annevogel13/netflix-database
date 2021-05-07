@@ -40,8 +40,6 @@ if(isset($_GET["subscribe"])){
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
-        <a class="nav-link" href="./ajoutePhoto.html">Ajoute Photo</a>
-        <a class="nav-link" href="./login.php">Login</a>
     </nav>
 
     <div class="mx-auto" style="width: 500px;">

@@ -23,8 +23,14 @@
         <a class="nav-link" href="./ajoutePhoto.php">Ajouter Photo</a>
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
-        <a class="nav-link" href="./modifierPhoto.php">Modfier Photo</a>
-        <a class="nav-link" href="../administrateurFonctionalites/statistiques.php">Statistiques</a>
+        <a class="nav-link" href="./modifierPhoto.php">Modifier Photo</a>
+        <?php 
+            $utId = $_SESSION["user"]; 
+            if(checkIfUserIsAdmin($conn,$utId) == 'yes'){
+                echo "<a class=\"nav-link\" href=\"../administrateurFonctionalites/statistiques.php\">Statistiques</a>"; 
+            }
+        ?>
+    
     </nav>
 
     <div class="mx-auto" style="width: 500px;">
@@ -48,10 +54,10 @@
                     <option value="3">dramas</option>
                 </select>
             </div>
-            <button class="btn btn-primary mt-3" type="submit" name="submit">UPLOAD</button>
+            <button class="btn btn-primary mt-3" type="submit" name="submit">ajoute image</button>
         </form>
         <div class="mt-3">
-            <h3>Message(s) d'erreur(s)</h3>
+           
             <?php   
                 
                 // upload image + ajoute photo aux data base

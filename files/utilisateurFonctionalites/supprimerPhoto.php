@@ -21,8 +21,12 @@
         <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
-        <a class="nav-link" href="./modifierPhoto.php">Modfier Photo</a>
-        <a class="nav-link" href="../administrateurFonctionalites/statistiques.php">Statistiques</a>
+        <a class="nav-link" href="./modifierPhoto.php">Modifier Photo</a>
+        <?php 
+            if(checkIfUserIsAdmin($conn,$_SESSION["user"]) == 'yes'){
+                echo "<a class=\"nav-link\" href=\"../administrateurFonctionalites/statistiques.php\">Statistiques</a>"; 
+            }
+        ?>
     </nav>
 
     <div class="mx-auto" style="width: 900px;">

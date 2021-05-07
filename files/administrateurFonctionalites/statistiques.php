@@ -1,4 +1,6 @@
-<?php include '../fonctions.php' ;
+<?php
+    session_start(); 
+    include '../fonctions.php' ;
     // creation du connection 
     $conn = createConnection($servername, $username, $password);
 ?>
@@ -27,7 +29,7 @@
 
     <?php 
         
-        $utId = "AnneVogel"; 
+        $utId = $_SESSION["user"]; 
         if(checkIfUserIsAdmin($conn, $utId) == 'no'){
             echo "<h3>Vous n'êtes pas une administrateur.<h3>"; 
             echo "<div style=\" display: none; \">";

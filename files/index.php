@@ -24,10 +24,13 @@ include 'fonctions.php' ?>
          
         <?php 
         if(!empty($_SESSION["user"])){ // if logged in show fonctionalites + deconnexion 
+            // link to all the fonctionalities 
             echo "<a class=\"nav-link\" href=\"./utilisateurFonctionalites/ajoutePhoto.php\">Fonctionalites</a>"; 
+
+            // button to disconnect 
             $button = "<button type=\"submit\" class=\"btn btn-light\" name=\"disconnect\">Déconnexion</button>"; 
             echo  "<form action=\"\" method=\"POST\">".$button."</form>"; 
-             
+
         }else echo "<button class=\"btn btn-light\"><a href=\"./login.php\">Connexion</a></button>"; // show only login 
 
         if(isset($_POST['disconnect'])){ // get the form --> by clicking on the button 
@@ -58,12 +61,6 @@ include 'fonctions.php' ?>
         ?>
         photo(s) selectionnée(s)
     </div>
-        <?php 
-            if(isset($_SESSION["user"])){
-                echo $_SESSION["user"]; 
-            }
-
-        ?>
     <div class="center">
         <div class="choisirCategorie">
             <p class=" tekstChoisirPhotos">Quelles photos souhaitez-vous afficher? </p>
