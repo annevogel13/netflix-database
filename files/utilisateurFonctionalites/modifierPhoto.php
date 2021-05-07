@@ -33,7 +33,7 @@
 
     <div class="mx-auto" style="width: 800px;">
         <h1 class="mt-3"> Les images </h1>
-        <h5>electionnez l'image que vous voulez changer et saisir les nouvelle données dans les champs. 
+        <h5>Selectionnez l'image que vous voulez changer et saisir les nouvelle données dans les champs. 
             Si la modification est prise en charge, un message va s'afficher. 
         </h5>
         <form action="" method="POST">

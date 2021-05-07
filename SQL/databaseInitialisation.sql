@@ -40,7 +40,7 @@ CREATE TABLE Utilisateur(
     PRIMARY KEY (utId) 
 
 )
-
+/* 1 --> admin /true  , 0 --> utilisateur  */ 
 INSERT INTO Utilisateur (utId, utMdP, utAdmin)
 VALUES (
         "p1905532",
