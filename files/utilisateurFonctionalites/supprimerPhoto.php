@@ -32,8 +32,8 @@
     <div class="mx-auto" style="width: 900px;">
         <h1 class="mt-3">Supprimer photo</h1>
     
-        <div class="p-5" style="background-color: #9eff84;">
-            <h3>Photo compte</h3>
+        
+            <h3>Photo's sur ton compte</h3>
             <form action='' method="POST">
                 <div>
                     <?php 
@@ -51,7 +51,7 @@
                 </div>
                 <button class="btn btn-danger mt-3" type="submit" name="supprimer">Supprime les photos selectionees</button>
             </form>
-        </div>
+        
     </div>
        
 </body>

@@ -48,8 +48,7 @@ include 'fonctions.php' ?>
     <div id="greenbox" class="greenbox">
         
         <?php 
-           
-           //utilisateur($conn); 
+       
             $selected = recupereCategorieSelect();
             if($selected === null){ // --> when we click on the link on the details page, it add a variable to the url 
                 if(!empty($_GET["categorie"])){
