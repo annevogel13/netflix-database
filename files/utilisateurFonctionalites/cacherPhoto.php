@@ -39,6 +39,13 @@
                         if(!empty($_GET["id"])){
                             $utId = $_GET["id"];
 
+                            if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
+                                $arr = utilisateur($conn); 
+                                foreach($arr as $id){
+                                    recuperePhotosUtilisateur($conn, $id, 0); // html code 
+                                }
+                            }else recuperePhotosUtilisateur($conn, $utId, 0); // html code 
+                            
                             formCacher($conn, $utId);  // creates the html code to display a form for the photos which are public
 
                         }else echo "login error";  
@@ -54,8 +61,14 @@
                     <?php
                     if(!empty($_GET["id"])){
                         $utId = $_GET["id"]; // needs to be session value 
-
-                        formAfficher($conn, $utId); // creates the html code to display a form for the photos which are hidden
+                        if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
+                            $arr = utilisateur($conn); 
+                            foreach($arr as $id){
+                                recuperePhotosUtilisateur($conn, $id, 1); // html code 
+                            }
+                        }else recuperePhotosUtilisateur($conn, $utId, 1); // html code 
+                        
+                        formAfficher($conn, $utId);  // creates the html code to display a form for the photos which are hidden
 
                     }else echo "login error";  
                     ?>

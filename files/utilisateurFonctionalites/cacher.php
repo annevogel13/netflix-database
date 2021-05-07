@@ -2,42 +2,32 @@
 
 // generates the html code for the photo's whiche aren't hidden
 function formCacher($conn, $utId){
-    if(!empty($_GET["id"])){
-        $utId = $_GET["id"]; // needs to be session variable 
-
-        recuperePhotosUtilisateur($conn, $utId, 0); // html code 
-       
-        if(isset($_POST['cacher'])){
-           if(!empty($_POST['photos'])){
-               foreach($_POST['photos'] as $photoId){ // form with checkboxes, return as an array
-                   
-                   remplaceCacherDansPhoto($conn, $utId, $photoId , 1); // we remplace the "cacher" dans le table avec 1
-                   header("Location: ./cacherPhoto.php?id=".$utId); // we refresh the page so that the changes are directly visible
-               }
-           }
-       
-       }
+   
+    if(isset($_POST['cacher'])){
+        if(!empty($_POST['photos'])){
+            foreach($_POST['photos'] as $photoId){ // form with checkboxes, return as an array
+                
+                remplaceCacherDansPhoto($conn, $photoId , 1); // we remplace the "cacher" dans le table avec 1
+                header("Location: ./cacherPhoto.php?id=".$utId); // we refresh the page so that the changes are directly visible
+            }
+        }
     }
 }
 
 // almost the same fonction as the one above. Only now, it displays the photos which are hidden
 function formAfficher($conn, $utId){
-    if(!empty($_GET["id"])){
-        $utId = $_GET["id"];
 
-        recuperePhotosUtilisateur($conn, $utId, 1);
-       
-        if(isset($_POST['afficher'])){
-           if(!empty($_POST['photos'])){
-               foreach($_POST['photos'] as $photoId){
-                   
-                   remplaceCacherDansPhoto($conn, $utId, $photoId , 0); // and remplaces the 1 in "cacher" to 0 
-                   header("Location: ./cacherPhoto.php?id=".$utId);
-               }
-           }
-       
-       }
+    if(isset($_POST['afficher'])){
+        if(!empty($_POST['photos'])){
+            foreach($_POST['photos'] as $photoId){
+                
+                remplaceCacherDansPhoto($conn, $photoId , 0); // and remplaces the 1 in "cacher" to 0 
+                header("Location: ./cacherPhoto.php?id=".$utId);
+            }
+        }
+    
     }
+    
 }
 
 // function which generates the html code to display the image with checkboxes (<-- needs to be inside a <form>)
@@ -56,7 +46,7 @@ function recuperePhotosUtilisateur($conn, $utId,  $cacher){
 }
 
 // fonction which executes the REPLACE INTO SET command sql 
-function remplaceCacherDansPhoto($conn, $utId, $photoId , $cacher){
+function remplaceCacherDansPhoto($conn, $photoId , $cacher){
     $sql = "SELECT * FROM `p1905532`.`Photo` WHERE photoId =".$photoId; // gets alle the current information of a photo 
     $result = $conn->query($sql);
     if($result->num_rows > 0){
