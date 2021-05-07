@@ -9,15 +9,10 @@ $password = "Shrill87Pebble";
 
 // `p1905532`.`utilisateur`
 
-/**
- * /brief fonction qui permet de connecte avec le base de donee
- * /param $servername : nom de serveur
- * /param $username : identifiant pour acceder aux serveur
- * /param $password : mot de passe pour acceder aux serveur 
- */
+
+//fonction which creates the connection with the database p1905532 (where we stored all our photos)
 function createConnection($servername, $username, $password)
 {
-
     // Create connection
     $conn = new mysqli($servername, $username, $password);
 
@@ -25,34 +20,28 @@ function createConnection($servername, $username, $password)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Le base de donnee est accesible<br>";
+    echo "Le base de donnee est accesible<br>"; // petit message for the uppper left corner, to make sure that the database is functioning 
     return $conn;
 }
 
-/**
- * /brief fonction qui recupere les photos dans une certaine categorie 
- * /param $conn : pour utiliser le connection avec le base de donnee
- * /param $idCategorie : identifiant d'une categorie (1/2/3)
- */
+//fonction which gets the photos of one catogory and displays the photo (html code)
 function recuperePhotoCategorie($conn, $idCategorie, $cacher){
-    if($idCategorie == "%"){
-        $sql = "SELECT nomFich, photoId, description, catId from `p1905532`.`Photo`"; 
+    if($idCategorie == "%"){ // if there isn't a category selected --> show all the photos (without the hidden ones)
+        $sql = "SELECT nomFich, photoId, description, catId from `p1905532`.`Photo` WHERE cacher =".$cacher ; 
     }else $sql = "SELECT nomFich, photoId, description, catId FROM `p1905532`.`Photo` WHERE catId = ".$idCategorie." AND cacher =".$cacher ;
     $result = $conn->query($sql);
+    
     if($result->num_rows > 0){
         while($row = $result -> fetch_assoc()){
-            $url = "photo.php?photoId=".$row['photoId']; 
-            $onclick = "onclick = \"parent.location='".$url."'\""; 
-            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage' ".$onclick.">";
+            $url = "photo.php?photoId=".$row['photoId']; // the url of the details page 
+            $onclick = "onclick = \"parent.location='".$url."'\""; // redirection to the details page if the photo is clicked 
+            echo "<img src='../images/" . $row["nomFich"] . "' class='singleImage' ".$onclick.">"; // with onclick filled 
         }
-    }else echo "0 results" ; 
+    }else echo "0 resultats" ; // if there aren't any photo selected --> error 
     
 }
 
-/**
- * /brief fonction qui récupère le valeur dans le form pour choisir un categorie 
- * /returns le identifiant du categorie 
- */
+// fonction which gets the value in the dropdown menu, to select the category to view
 function recupereCategorieSelect(){
 
     if(isset($_POST['submit'])){
@@ -60,16 +49,12 @@ function recupereCategorieSelect(){
             $selected = $_POST['categorie'];
             return $selected; 
         } else {
-            echo 'Please select the value.';
+            echo 'Vous n\'avez pas choisi une categorie.<br>';
         }
     }
 }
 
-/**
- * /brief foction which generates the green box on the home page 
- * /param $conn : the variable which stores the connection 
- * /param $idCategorie : the variable which indicates which categorie we are going to display 
- */
+//fonction which generates the green box on the home page with the count of the number of photos selected 
 function greenbox($conn, $idCategorie){
     if($idCategorie == "%"){
         $sql = "SELECT COUNT(nomFich) from `p1905532`.`Photo`"; 
@@ -80,10 +65,10 @@ function greenbox($conn, $idCategorie){
         while($row = $result -> fetch_assoc()){
             echo $row["COUNT(nomFich)"]; // to display the number of photo's in a category 
         }
-    }else echo "0 results" ; 
+    }else echo "0 resultats" ; 
 }
 
-
+// function which generates the <html> code for the details page 
 function recuperePhoto($conn, $idPhoto){
         
     $sql = "SELECT nomFich, description, catId, utId FROM `p1905532`.`Photo` WHERE photoId = ".$idPhoto;
@@ -114,14 +99,10 @@ function recuperePhoto($conn, $idPhoto){
                 ";
             echo "<img src='../images/" . $row["nomFich"] . "' class=\"mx-auto\" style=\"width: 500px; height=\"auto\" width=\"500px\">";
         }
-    }else echo "0 results" ;   
+    }else echo "0 resultats" ;   
 }
 
-/**
- * /brief fonction which returns the name of the category corresponding to the $catId 
- * /param $conn : stores the information about the connection 
- * /param $catId : number which indicates which category it is
- */
+//fonction which returns the name of the category corresponding to the $catId 
 function getCategorieFromCatId($conn, $catId){
     $sql = "SELECT nomCat FROM `p1905532`.`Categorie` WHERE catId = ".$catId;
     $result = $conn->query($sql);
@@ -132,8 +113,8 @@ function getCategorieFromCatId($conn, $catId){
     }           
 }
 
-
-
+// fonction for the purpupse of debugging 
+// fonction which shows all the users 
 function utilisateur($conn){
         $sql = "SELECT utId, utMdP, utAdmin from `p1905532`.`Utilisateur`"; 
         $result = $conn->query($sql);
@@ -143,7 +124,5 @@ function utilisateur($conn){
                 echo $row["utMdP"]."<br>"; // c'est le mot de passe 
                 echo $row["utAdmin"]."<br>"; // c'est un champ qui n'est pas utiliser pour le login (mais c'est pour apres)
             }
-        }else echo "0 results" ; 
-        
-    
+        }else echo "0 results" ;    
 }

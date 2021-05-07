@@ -19,24 +19,24 @@
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
-        <a class="nav-link" href="./utilisateurFonctionalites/cacherPhoto.php">Ajoute Photo</a>
+        <a class="nav-link" href="./utilisateurFonctionalites/ajoutePhoto.php">Ajoute Photo</a>
         <a class="nav-link" href="./login.php">Login</a>
     </nav>
 
     <div id="greenbox" class="greenbox">
         
         <?php 
-        //utilisateur($conn); 
-        $selected = recupereCategorieSelect();
-                if($selected === null){
-                    if(!empty($_GET["categorie"])){
-                        $selected = $_GET["categorie"];
-                    }else $selected = '%';             
-                }  
+            //utilisateur($conn); 
+            $selected = recupereCategorieSelect();
+            if($selected === null){ // --> when we click on the link on the details page, it add a variable to the url 
+                if(!empty($_GET["categorie"])){
+                    $selected = $_GET["categorie"]; // we get this variable and use it to display the right category 
+                }else $selected = '%';             
+            }  
             
-            ; greenbox($conn, $selected) 
+            greenbox($conn, $selected); // echos a number 
         ?>
-     photo(s) selectionnée(s)
+        photo(s) selectionnée(s)
     </div>
 
     <div class="center">
@@ -52,18 +52,11 @@
                 <input type="submit" name="submit" value="Choisir la categorie">
             </form>
         </div>
-        <h2>Tous</h2>
+        <h2>Les images</h2>
         <?php 
-
-               recuperePhotoCategorie($conn, $selected, 0); // display all the photo's which are not "cacher"
-               
-                
-            $conn->close(); 
+            recuperePhotoCategorie($conn, $selected, 0); // display all the photo's which are not hidden  
         ?>
-    </div>
-    </div>
-
-
+    </div>  
 </body>
-
 </html>
+
