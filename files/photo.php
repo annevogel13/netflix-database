@@ -31,15 +31,12 @@
                     <?php
                       
                        $idPhoto = $_GET["photoId"]; 
-                       recuperePhoto($conn, $idPhoto); 
+                       recuperePhoto($conn, $idPhoto); // gets the information of one photo 
 
                     ?>
-
                 </p>
             </div>    
         </div>
     </div>
-
 </body>
-
 </html>

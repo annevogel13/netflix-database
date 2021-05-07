@@ -58,70 +58,70 @@
         </table> 
     
     </div>
-
-
-
-    <?php 
-
-        function exuteEchoSQL($conn, $requet, $showRow){
-            $result = $conn->query($requet);
-            
-           if($result->num_rows > 0){
-               // echo $result; 
-                while($row = $result -> fetch_assoc()){ 
-                    echo $row[$showRow]; 
-                    return $row[$showRow];
-                    }
-            }  
-        }
-
-        function tableStatsUser($conn){
-            echo "<tbody class=\"table\">"; 
-                // select all users and execute statsUser() for every one 
-                $sql = "SELECT utId FROM `p1905532`.`Utilisateur`"; 
-                $resultat= $conn->query($sql); 
-                if($resultat->num_rows>0){
-                    while($row = $resultat -> fetch_assoc()){ 
-                        statsUser($conn, $row["utId"]);
-                    } 
-                }
-            echo "</tbody>"; 
-        }
-
-        function statsUser($conn, $utId){
-            $sqlF = "SELECT COUNT(photoId) FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND catId = 1 "; // fantasy
-            $sqlC = "SELECT COUNT(photoId) FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND catId = 2 "; // comedy
-            $sqlD = "SELECT COUNT(photoId) FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND catId = 3 "; // dramas
-            $nbF = $nbC = $nbD = 0 ; 
-            $r1 = $conn->query($sqlF);
-            if($r1->num_rows>0){
-                while($row = $r1 -> fetch_assoc()){ 
-                    $nbF = $row["COUNT(photoId)"]; 
-                } 
-            }
-
-            $r2 = $conn->query($sqlC);
-            if($r2->num_rows>0){
-                while($row = $r2 -> fetch_assoc()){ 
-                    $nbC = $row["COUNT(photoId)"]; 
-                } 
-            }
-
-            $r3 = $conn->query($sqlD);
-            if($r3->num_rows>0){
-                while($row = $r3 -> fetch_assoc()){ 
-                    $nbD = $row["COUNT(photoId)"]; 
-                } 
-            }
-            $nbTotale = $nbF+$nbC+$nbD;
-            $thUt = "<th>".$utId."</th>"; 
-            $th0 = "<th>".$nbTotale."</th>"; 
-            $th1 = "<th>".$nbF."</th>"; 
-            $th2 = "<th>".$nbC."</th>"; 
-            $th3 = "<th>".$nbD."</th>"; 
-            echo "<tr>".$thUt.$th0.$th1.$th2.$th3."</tr>"; 
-        }
-    ?>
 </body>
-
 </html>
+
+<?php 
+    // function which executes a sql commend and echos and returns the result 
+    function exuteEchoSQL($conn, $requet, $showRow){
+        $result = $conn->query($requet);
+        
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){ 
+                echo $row[$showRow]; 
+                return $row[$showRow];
+                }
+        }  
+    }
+
+    // function which creates the table with stats of the users 
+    function tableStatsUser($conn){
+        echo "<tbody class=\"table\">"; // nice style to display a table 
+            // select all users and execute statsUser() for every one 
+            $sql = "SELECT utId FROM `p1905532`.`Utilisateur`"; 
+            $resultat= $conn->query($sql); 
+            if($resultat->num_rows>0){
+                while($row = $resultat -> fetch_assoc()){ 
+                    statsUser($conn, $row["utId"]);
+                } 
+            }
+        echo "</tbody>"; 
+    }
+
+    // function which counts the number of photos in each category 
+    function statsUser($conn, $utId){
+        $sqlF = "SELECT COUNT(photoId) FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND catId = 1 "; // fantasy
+        $sqlC = "SELECT COUNT(photoId) FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND catId = 2 "; // comedy
+        $sqlD = "SELECT COUNT(photoId) FROM `p1905532`.`Photo` WHERE utId ='".$utId."' AND catId = 3 "; // dramas
+        $nbF = $nbC = $nbD = 0 ; // initialise because we need them later in the function 
+        // for each category, we want to know exactly how many images 
+        $r1 = $conn->query($sqlF);
+        if($r1->num_rows>0){
+            while($row = $r1 -> fetch_assoc()){ 
+                $nbF = $row["COUNT(photoId)"]; 
+            } 
+        }
+
+        $r2 = $conn->query($sqlC);
+        if($r2->num_rows>0){
+            while($row = $r2 -> fetch_assoc()){ 
+                $nbC = $row["COUNT(photoId)"]; 
+            } 
+        }
+
+        $r3 = $conn->query($sqlD);
+        if($r3->num_rows>0){
+            while($row = $r3 -> fetch_assoc()){ 
+                $nbD = $row["COUNT(photoId)"]; 
+            } 
+        }
+        $nbTotale = $nbF+$nbC+$nbD; // calulate the totale of images 
+        // create the <html> code for the table 
+        $thUt = "<th>".$utId."</th>"; // code for a cel 
+        $th0 = "<th>".$nbTotale."</th>"; 
+        $th1 = "<th>".$nbF."</th>"; 
+        $th2 = "<th>".$nbC."</th>"; 
+        $th3 = "<th>".$nbD."</th>"; 
+        echo "<tr>".$thUt.$th0.$th1.$th2.$th3."</tr>"; // code for a row 
+    }
+?>
