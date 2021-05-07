@@ -33,8 +33,8 @@
 
     <div class="mx-auto" style="width: 800px;">
         <h1 class="mt-3"> Les images </h1>
-        <h5>Selection l'image que vous voulez changer. Et direcement apres saisi les nouvelle données dans les champs. 
-            Si le modification est pris en charge, il afficherai une message. 
+        <h5>electionnez l'image que vous voulez changer et saisir les nouvelle données dans les champs. 
+            Si la modification est prise en charge, un message va s'afficher. 
         </h5>
         <form action="" method="POST">
             <div>
@@ -48,11 +48,11 @@
                 }else recuperePhotosUtilisateur($conn, $utId); // show all the images of the user with radio buttons 
             ?>
             <div>
-                <label for="modDescription">Si vous voulez changer le description saisi ici</label>
+                <label for="modDescription">Si vous voulez changer la description saisir ici</label>
                 <textarea class="form-control" rows="2" name="modDescription"></textarea>
             </div>
             <div class="mb-3">
-                    <label for="modCategorie">Si vous voulez changer le categorie saisi ici</label>
+                    <label for="modCategorie">Si vous voulez changer le categorie saisir ici</label>
                     <select name="modCategorie" class="form-control" required>
                         <option value="none">choisir une cateagorie</option>
                         <option value="1">fantasy</option>
