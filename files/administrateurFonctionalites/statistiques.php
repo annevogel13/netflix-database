@@ -18,12 +18,23 @@
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="../index.php">Accueil</a>
-        <a class="nav-link" href="./ajoutePhoto.php">Ajoute Photo</a>
-        <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
-        <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
+        <a class="nav-link" href="../utilisateurFonctionalites/ajoutePhoto.php">Ajoute Photo</a>
+        <a class="nav-link" href="../utilisateurFonctionalites/supprimerPhoto.php">Supprimer Photo</a>
+        <a class="nav-link" href="../utilisateurFonctionalites/cacherPhoto.php">Cacher Photo</a>
+        <a class="nav-link" href="../utilisateurFonctionalites/modifierPhoto.php">Modifier Photo</a>
+        <a class="nav-link" href="../statistiques.php">Statistiques</a>
     </nav>
 
-    <div class="mx-auto" style="width: 600px;">
+    <?php 
+        
+        $utId = "AnneVogel"; 
+        if(checkIfUserIsAdmin($conn, $utId) == 'no'){
+            echo "<h3>Vous n'êtes pas une administrateur.<h3>"; 
+            echo "<div style=\" display: none; \">";
+        }else echo "<div class=\"mx-auto\" style=\"width: 600px;\">";
+        
+    ?>
+    
         <h1 class="mt-3"> Statistiques </h1>
         <br>
         <h5>Tableau avec informations generales</h5>

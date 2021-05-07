@@ -23,6 +23,7 @@
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
         <a class="nav-link" href="./modifierPhoto.php">Modfier Photo</a>
+        <a class="nav-link" href="../administrateurFonctionalites/statistiques.php">Statistiques</a>
     </nav>
 
     <div class="mx-auto" style="width: 900px;">

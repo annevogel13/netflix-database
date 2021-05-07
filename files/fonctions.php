@@ -9,7 +9,6 @@ $password = "Shrill87Pebble";
 
 // `p1905532`.`utilisateur`
 
-
 //fonction which creates the connection with the database p1905532 (where we stored all our photos)
 function createConnection($servername, $username, $password)
 {

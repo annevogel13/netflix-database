@@ -22,6 +22,7 @@
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
         <a class="nav-link" href="./modifierPhoto.php">Modfier Photo</a>
+        <a class="nav-link" href="../administrateurFonctionalites/statistiques.php">Statistiques</a>
     </nav>
 
     <div class="mx-auto" style="width: 500px;">
@@ -132,7 +133,7 @@
         
             if(in_array($fileActualExt, $allowed)){ // extension is allowed
                 if($fileError === 0 ){ // if 0 --> no errors 
-                    if($fileSize <  100000){ // taille of image max = 100 ko = 100 * 8 o = 800000      
+                    if($fileSize <  100000){ // size of file      
                         $fileDestination = '../images/'.$fileFirstName.".".$fileActualExt; // place where it's going to be
               
                         move_uploaded_file($fileTmpName, $fileDestination);
