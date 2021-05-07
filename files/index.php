@@ -1,4 +1,6 @@
-<?php include 'fonctions.php' ?>
+<?php 
+session_start(); 
+include 'fonctions.php' ?>
 
 <!doctype html>
 <html lang="fr">
@@ -20,7 +22,22 @@
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
         <a class="nav-link" href="./utilisateurFonctionalites/ajoutePhoto.php">Fonctionalites</a>
-        <a class="nav-link" href="./login.php">Login</a>
+        <a class="nav-link" href="./login.php">Connexion</a> 
+        <?php 
+         /*if(isset($_SESSION["user"])){
+            echo  "<form><button type=\"submit\" class=\"nav-link\" name=\"disconnect\">Déconnexion</button></form>";  
+        }else echo "<a class=\"nav-link\" href=\"./login.php\">Connexion</a>"; 
+
+
+        if(isset($_POST['disconnect'])){ // get the form --> by clicking on the button 
+            
+            // remove all session variables
+            session_unset();
+            // destroy the session
+            session_destroy(); 
+        } */ 
+        ?>
+        
     </nav>
 
     <div id="greenbox" class="greenbox">
@@ -38,7 +55,12 @@
         ?>
         photo(s) selectionnée(s)
     </div>
+        <?php 
+            if(isset($_SESSION["user"])){
+                echo $_SESSION["user"]; 
+            }
 
+        ?>
     <div class="center">
         <div class="choisirCategorie">
             <p class=" tekstChoisirPhotos">Quelles photos souhaitez-vous afficher? </p>

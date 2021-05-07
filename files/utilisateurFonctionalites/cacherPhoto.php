@@ -1,4 +1,5 @@
 <?php 
+    session_start(); 
         include '../fonctions.php';
         include 'cacher.php'; // a lot of fonctions, easier to implement them in a seperate file 
         $conn = createConnection($servername, $username, $password);
@@ -29,7 +30,7 @@
     <div class="mx-auto" style="width: 900px;">
         <h1 class="mt-3">Cacher photo</h1>
         <h5 class="mt-3">Si tu veux cacher ou de remettre la photo sur visible, clique sur le "checkbox" et clique sur le bouton correspondant</h5>
-        <h6 class="mt-3">Apres clique sur "cacher photo" dans le "nav-bar" -> voir le resultat</h6>
+        
 
         <div class="p-5" style="background-color: #9eff84;">
             <h3>Photo visible</h3>
@@ -37,8 +38,7 @@
                 <div>
                     <?php 
            
-                        if(!empty($_GET["id"])){
-                            $utId = $_GET["id"];
+                        $utId = $_SESSION["user"];  
 
                             if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
                                 $arr = utilisateur($conn); 
@@ -48,8 +48,6 @@
                             }else recuperePhotosUtilisateur($conn, $utId, 0); // html code 
                             
                             formCacher($conn, $utId);  // creates the html code to display a form for the photos which are public
-
-                        }else echo "login error";  
                     ?>
                 </div>
                 <button class="btn btn-danger mt-3" type="submit" name="cacher">Cacher les photos selectionees</button>
@@ -60,8 +58,8 @@
             <form action='' method="POST">
                 <div>
                     <?php
-                    if(!empty($_GET["id"])){
-                        $utId = $_GET["id"]; // needs to be session value 
+                    
+                        $utId = $_SESSION["user"];  
                         if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
                             $arr = utilisateur($conn); 
                             foreach($arr as $id){
@@ -71,7 +69,6 @@
                         
                         formAfficher($conn, $utId);  // creates the html code to display a form for the photos which are hidden
 
-                    }else echo "login error";  
                     ?>
                 <br>
                 <button class="btn btn-success mt-3" type="submit" name="afficher">Afficher les photos selectionees</button>

@@ -1,4 +1,6 @@
-<?php include '../fonctions.php' ;
+<?php 
+    session_start(); 
+    include '../fonctions.php' ;
     // creation du connection 
     $conn = createConnection($servername, $username, $password);
 ?>
@@ -40,7 +42,7 @@
             <div class="mb-3">
                 <label for="inputCategorie" class="form-label">Choisir une image</label>
                 <select name="inputCategorie" class="form-control" required>
-                    <option value="none">choisir une cateagorie</option>
+                    <option value="none">choisir une categorie</option>
                     <option value="1">fantasy</option>
                     <option value="2">comedy</option>
                     <option value="3">dramas</option>
@@ -99,7 +101,7 @@
 
 
     function insertPhoto($conn, $photoId, $nomFich, $description, $catId){ // adds a photo to the database 
-        $utId = 'AnneVogel'; // needs to be session variable 
+        $utId = $_SESSION["user"]; 
         $sqlValues = "('".$photoId."', '".$nomFich."','".$description."','".$catId."','".$utId."')";  
         $sql = "INSERT INTO `p1905532`.`Photo` (photoId, nomFich, description, catId, utId) VALUES".$sqlValues; 
              

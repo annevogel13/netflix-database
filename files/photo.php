@@ -26,7 +26,7 @@
         <div class="row">
 
             <div class="col" margin-top="15px">
-                <h2>Details sur une photo</h2>
+                <h2>Details de la photo</h2>
                 <p id="test">
                     <?php
                       

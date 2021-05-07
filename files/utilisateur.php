@@ -4,7 +4,7 @@
     retourne vrai si le pseudo est disponible (pas d'occurence dans les données existantes), faux sinon*/
     function checkAvailability($pseudo, $link)
     {
-        $query = "SELECT COUNT(utId) FROM `p1905532`.`utilisateur` WHERE utId = '". $pseudo ."';";
+        $query = "SELECT COUNT(utId) FROM `p1905532`.`Utilisateur` WHERE utId = '". $pseudo ."';";
         $result = executeQuery($link, $query);
         
         if($result->num_rows > 0){
@@ -17,12 +17,11 @@
     }
 
 
-    /*Cette fonction prend en entrée un pseudo et un mot de passe, associe une couleur aléatoire dans le tableau de taille fixe  
-    array('red', 'green', 'blue', 'black', 'yellow', 'orange') et enregistre le nouvel utilisateur dans la relation utilisateur via la connexion*/
+    /*Cette fonction prend en entrée un pseudo et un mot de passe et enregistre le nouvel utilisateur dans la relation utilisateur via la connexion*/
     function register($pseudo, $hashPwd, $link)
     {
       
-        $query = "INSERT INTO utilisateur VALUES ('". $pseudo ."', '". $hashPwd ."', 'utilisateur', 'disconnected');";
+        $query = "INSERT INTO Utilisateur VALUES ('". $pseudo ."', '". $hashPwd ."', 'utilisateur', 'disconnected');";
         executeUpdate($link, $query);
     }
 
@@ -31,7 +30,7 @@
     utilisateur via la connexion*/
     function setConnected($pseudo, $link)
     {
-        $query = "UPDATE utilisateur SET etat = 'connected' WHERE pseudo = '". $pseudo ."';";
+        $query = "UPDATE Utilisateur SET etat = 'connected' WHERE pseudo = '". $pseudo ."';";
         executeUpdate($link, $query);
     }
 
@@ -39,7 +38,7 @@
     /*Cette fonction prend en entrée un pseudo et mot de passe et renvoie vrai si l'utilisateur existe (au moins un tuple dans le résultat), faux sinon*/
     function getUser($pseudo, $hashPwd, $link)
     {
-        $query = "SELECT utId FROM utilisateur WHERE utId = '". $pseudo ."' AND utMdP = '". $hashPwd ."' AND etat = 'disconnected';";
+        $query = "SELECT utId FROM Utilisateur WHERE utId = '". $pseudo ."' AND utMdP = '". $hashPwd ."' AND etat = 'disconnected';";
         $result = executeQuery($link, $query);
         return (mysqli_num_rows($result) == 1);
     }
@@ -51,7 +50,7 @@
         $users = array();
         $index = 0;
         
-        $query = "SELECT utId FROM utilisateur WHERE etat = 'connected'";
+        $query = "SELECT utId FROM Utilisateur WHERE etat = 'connected'";
         $result = executeQuery($link, $query);
         
         while ($row = mysqli_fetch_assoc($result)) {
@@ -67,7 +66,7 @@
     utilisateur via la connexion*/
     function setDisconnected($pseudo, $link)
     {
-        $query = "UPDATE utilisateur SET etat = 'disconnected' WHERE utId = '". $pseudo ."';";
+        $query = "UPDATE Utilisateur SET etat = 'disconnected' WHERE utId = '". $pseudo ."';";
         executeUpdate($link, $query);
     }
 

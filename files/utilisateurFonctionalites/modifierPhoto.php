@@ -1,4 +1,6 @@
-<?php include '../fonctions.php' ; // needs to be file which has a start_session() and has a session value which stores the utId 
+<?php 
+    session_start(); 
+    include '../fonctions.php' ; 
     // creation du connection 
     $conn = createConnection($servername, $username, $password);
 ?>
@@ -32,7 +34,7 @@
         <form action="" method="POST">
             <div>
             <?php
-                $utId = 'p1905532'; // needs to be session value 
+                $utId = $_SESSION["user"]; // needs to be session value 
                 if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
                     $arr = utilisateur($conn); 
                     foreach($arr as $id){

@@ -19,7 +19,7 @@ function createConnection($servername, $username, $password)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Le base de donnee est accesible<br>"; // petit message for the uppper left corner, to make sure that the database is functioning 
+    echo "La base de donnee est accesible<br>"; // petit message for the uppper left corner, to make sure that the database is functioning 
     return $conn;
 }
 

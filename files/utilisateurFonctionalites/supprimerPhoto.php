@@ -1,6 +1,7 @@
 <?php 
-        include '../fonctions.php';
-        $conn = createConnection($servername, $username, $password);
+    session_start(); 
+    include '../fonctions.php';
+    $conn = createConnection($servername, $username, $password);
     ?>
 <!doctype html>
 <html lang="fr">
@@ -33,18 +34,15 @@
                 <div>
                     <?php 
                         
-                        if(!empty($_GET["id"])){
-                            $utId = $_GET["id"]; // get the id of the user (lack of session variable )
-                            if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
-                                $arr = utilisateur($conn); 
-                                foreach($arr as $id){
-                                    recuperePhotosUtilisateur($conn, $id);
-                                }
-                            }else recuperePhotosUtilisateur($conn, $utId); // collects all the photo's of the $utId (certain user)
-                            
-                            formDelete($conn, $utId); // collects the photos that need to be deleted in an array and executes the sql command 
-
-                        }else echo "login error";  // if there isn't a $utId defined, shows login error 
+                       $utId = $_SESSION["user"]; 
+                        if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
+                            $arr = utilisateur($conn); 
+                            foreach($arr as $id){
+                                recuperePhotosUtilisateur($conn, $id);
+                            }
+                        }else recuperePhotosUtilisateur($conn, $utId); // collects all the photo's of the $utId (certain user)
+                        
+                        formDelete($conn, $utId); // collects the photos that need to be deleted in an array and executes the sql command  
                     ?>
                 </div>
                 <button class="btn btn-danger mt-3" type="submit" name="supprimer">Supprime les photos selectionees</button>
