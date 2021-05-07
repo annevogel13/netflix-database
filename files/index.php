@@ -21,13 +21,22 @@ include 'fonctions.php' ?>
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
-        <a class="nav-link" href="./utilisateurFonctionalites/ajoutePhoto.php">Fonctionalites</a>
-       <!-- <a class="nav-link" href="./login.php">Connexion</a> --> 
+         
         <?php 
-        if(!empty($_SESSION["user"])){
-            echo  "<form action=\"\" method=\"POST\"><button type=\"submit\" class=\"nav-link\" name=\"disconnect\">Déconnexion</button></form>";  
-        }else echo "<a class=\"nav-link\" href=\"./login.php\">Connexion</a>"; 
+        if(!empty($_SESSION["user"])){ // if logged in show fonctionalites + deconnexion 
+            echo "<a class=\"nav-link\" href=\"./utilisateurFonctionalites/ajoutePhoto.php\">Fonctionalites</a>"; 
+            $button = "<button type=\"submit\" class=\"btn btn-light\" name=\"disconnect\">Déconnexion</button>"; 
+            echo  "<form action=\"\" method=\"POST\">".$button."</form>"; 
+             
+        }else echo "<button class=\"btn btn-light\"><a href=\"./login.php\">Connexion</a></button>"; // show only login 
 
+        if(isset($_POST['disconnect'])){ // get the form --> by clicking on the button 
+            // remove all session variables
+            session_unset();
+            // destroy the session
+            session_destroy(); 
+            header("Location: ./index.php"); // reload the page --> deconnexion changes into connexion  
+        }  
 
         ?>
         
@@ -36,14 +45,6 @@ include 'fonctions.php' ?>
     <div id="greenbox" class="greenbox">
         
         <?php 
-           
-            if(isset($_POST['disconnect'])){ // get the form --> by clicking on the button 
-            // remove all session variables
-            session_unset();
-            // destroy the session
-            session_destroy(); 
-            header("Location: ./index.php");
-        }  
            
            //utilisateur($conn); 
             $selected = recupereCategorieSelect();
