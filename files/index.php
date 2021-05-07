@@ -22,20 +22,13 @@ include 'fonctions.php' ?>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
         <a class="nav-link" href="./utilisateurFonctionalites/ajoutePhoto.php">Fonctionalites</a>
-        <a class="nav-link" href="./login.php">Connexion</a> 
+       <!-- <a class="nav-link" href="./login.php">Connexion</a> --> 
         <?php 
-         /*if(isset($_SESSION["user"])){
-            echo  "<form><button type=\"submit\" class=\"nav-link\" name=\"disconnect\">Déconnexion</button></form>";  
+        if(!empty($_SESSION["user"])){
+            echo  "<form action=\"\" method=\"POST\"><button type=\"submit\" class=\"nav-link\" name=\"disconnect\">Déconnexion</button></form>";  
         }else echo "<a class=\"nav-link\" href=\"./login.php\">Connexion</a>"; 
 
 
-        if(isset($_POST['disconnect'])){ // get the form --> by clicking on the button 
-            
-            // remove all session variables
-            session_unset();
-            // destroy the session
-            session_destroy(); 
-        } */ 
         ?>
         
     </nav>
@@ -43,7 +36,16 @@ include 'fonctions.php' ?>
     <div id="greenbox" class="greenbox">
         
         <?php 
-            //utilisateur($conn); 
+           
+            if(isset($_POST['disconnect'])){ // get the form --> by clicking on the button 
+            // remove all session variables
+            session_unset();
+            // destroy the session
+            session_destroy(); 
+            header("Location: ./index.php");
+        }  
+           
+           //utilisateur($conn); 
             $selected = recupereCategorieSelect();
             if($selected === null){ // --> when we click on the link on the details page, it add a variable to the url 
                 if(!empty($_GET["categorie"])){
