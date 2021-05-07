@@ -15,7 +15,7 @@ if(isset($_POST["valider"])){
     if($exist){
         setConnected($pseudo, $link);
         $_SESSION["user"] = $pseudo;
-        header('Location: login.php');
+        header('Location: index.php');
     }else{
         $stateMsg = "Le couple pseudo/mot de passe ne correspond &agrave; aucun utilisateur enregistr&eacute;";
     }
@@ -49,9 +49,9 @@ if(isset($_GET["subscribe"])){
             <?php echo $stateMsg; ?>
         </div>
         <?php if(isset($successMsg)){echo $successMsg;} ?>
-        <form action="index.php" method="POST">
+        <form action="" method="POST">
             <table  class="mt-3">
-                <!-- pas obligatoire nessesaite de faire une tablaux  -->
+                
                 <tr>
                     <td class="loginInfo">Pseudo:</td>
                     <td><input type="text" name="pseudo"></td>

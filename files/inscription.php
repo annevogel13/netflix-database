@@ -1,4 +1,4 @@
-<?php
+<?php //check 
     session_start();
     require_once 'bd.php';
     require_once 'utilisateur.php';
@@ -18,6 +18,7 @@
             if($available){
                 
                 register($pseudo, $hashMdp, $link);
+                $_SESSION["user"] = $pseudo; // session variable 
                 header('Location: index.php?subscribe=yes');
             }else{
                 $stateMsg = "Le pseudo demand&eacute; est d&eacute;j&agrave; utilis&eacute;";
