@@ -12,10 +12,11 @@
         
         $link = getConnection($servername, $username, $password, $dbName);
         
-        $available = checkAvailability($pseudo, $link);
+        $available = checkAvailability($pseudo, $link); // bool --> true = 1 , false = 0 
         
         if($hashMdp == $hashConfirmMdp){
             if($available){
+                
                 register($pseudo, $hashMdp, $link);
                 header('Location: index.php?subscribe=yes');
             }else{
@@ -46,7 +47,7 @@
 
         <div  class="mx-auto" style="width: 500px;">
             <div class="errorMsg"><?php echo $stateMsg; ?></div>
-            <form action="inscription.php" method="POST">
+            <form action="" method="POST">
                 <table>
                     <tr><td class="loginInfo">Pseudo souhait&eacute;:</td><td><input type="text" name="pseudo"></td></tr>
                     <tr><td class="loginInfo">Mot de passe:</td><td><input type="password" name="mdp"></td></tr>

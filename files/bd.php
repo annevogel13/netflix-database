@@ -104,8 +104,10 @@
     /*Cette fonction prend en entrée une connexion vers la base de données du chat ainsi qu'une requête SQL SELECT 
     et renvoie les résultats de la requête. Si le résultat est faux, un message d'erreur est affiché*/
     function executeQuery($link, $query)
-    {
+    {   
+        //echo $query; 
         $result = mysqli_query($link, $query);
+        
         if(!$result){
             echo "La requete ".$query." n'a pas pu etre executee a cause d'une erreur de syntaxe";
         }

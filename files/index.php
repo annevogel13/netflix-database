@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar" style="background-color: paleturquoise;">
         <a class="navbar-brand" href="./index.php">Accueil</a>
-        <a class="nav-link" href="./utilisateurFonctionalites/ajoutePhoto.php">Ajoute Photo</a>
+        <a class="nav-link" href="./utilisateurFonctionalites/ajoutePhoto.php">Fonctionalites</a>
         <a class="nav-link" href="./login.php">Login</a>
     </nav>
 

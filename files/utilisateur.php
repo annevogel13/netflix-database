@@ -4,9 +4,16 @@
     retourne vrai si le pseudo est disponible (pas d'occurence dans les données existantes), faux sinon*/
     function checkAvailability($pseudo, $link)
     {
-        $query = "SELECT pseudo FROM utilisateur WHERE pseudo = '". $pseudo ."';";
+        $query = "SELECT COUNT(utId) FROM `p1905532`.`utilisateur` WHERE utId = '". $pseudo ."';";
         $result = executeQuery($link, $query);
-        return mysqli_num_rows($result) == 0;
+        
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                return $row["COUNT(utId)"] == 0; 
+                    
+            }
+        } 
+           //return mysqli_num_rows($result) == 0; 
     }
 
 
@@ -14,10 +21,8 @@
     array('red', 'green', 'blue', 'black', 'yellow', 'orange') et enregistre le nouvel utilisateur dans la relation utilisateur via la connexion*/
     function register($pseudo, $hashPwd, $link)
     {
-        $colors = array('red', 'green', 'blue', 'black', 'yellow', 'orange');
-        $index = rand(0, 5);
-        $color = $colors[$index];
-        $query = "INSERT INTO utilisateur VALUES ('". $pseudo ."', '". $hashPwd ."', '". $color ."', 'disconnected');";
+      
+        $query = "INSERT INTO utilisateur VALUES ('". $pseudo ."', '". $hashPwd ."', 'utilisateur', 'disconnected');";
         executeUpdate($link, $query);
     }
 
