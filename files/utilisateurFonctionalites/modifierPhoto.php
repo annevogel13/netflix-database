@@ -20,6 +20,7 @@
         <a class="nav-link" href="./ajoutePhoto.php">Ajouter Photo</a>
         <a class="nav-link" href="./supprimerPhoto.php">Supprimer Photo</a>
         <a class="nav-link" href="./cacherPhoto.php">Cacher Photo</a>
+        <a class="nav-link" href="./modifierPhoto.php">Modfier Photo</a>
     </nav>
 
     <div class="mx-auto" style="width: 800px;">
@@ -30,8 +31,13 @@
         <form action="" method="POST">
             <div>
             <?php
-                $utId = 'p19055555'; // needs to be session value 
-                recuperePhotosUtilisateur($conn, $utId); // show all the images of the user with radio buttons 
+                $utId = 'p1905532'; // needs to be session value 
+                if(checkIfUserIsAdmin($conn, $utId) === 'yes'){ // to make the difference between utilisateur and admin 
+                    $arr = utilisateur($conn); 
+                    foreach($arr as $id){
+                        recuperePhotosUtilisateur($conn, $id); // for each utilisateur display the image as radio button 
+                    }
+                }else recuperePhotosUtilisateur($conn, $utId); // show all the images of the user with radio buttons 
             ?>
             <div>
                 <label for="modDescription">Si vous voulez changer le description saisi ici</label>
@@ -50,7 +56,7 @@
         </form>
     </div>
     <h3>
-        <?php  recupereChangements($conn, $utId); // get the informations of the form, and calls the fontion which updates the tabel ?>
+        <?php  recupereChangements($conn); // get the informations of the form, and calls the fontion which updates the tabel ?>
     </h3>
     </body>
 
@@ -74,7 +80,7 @@
 
     }
 
-    function recupereChangements($conn, $utId){ // gets the information from the table and calls the fonction which replaces the values 
+    function recupereChangements($conn){ // gets the information from the table and calls the fonction which replaces the values 
         
         if(isset($_POST['modifierSasie'])){ // get the form --> by clicking on the button 
             if(!empty($_POST['radio'])){ // get the photoId 
@@ -89,15 +95,15 @@
                     $cat = $_POST['modCategorie']; 
                 }
                 
-                modifierPhoto($conn, $utId, $photoId, $cat, $descr); 
+                modifierPhoto($conn, $photoId, $cat, $descr); 
             }else echo "Vous devriez selectionner une photo avec le button à côte d'une image.";
         }
     }
 
 
-    function modifierPhoto($conn, $utId, $photoId , $cat, $descr){
+    function modifierPhoto($conn, $photoId , $cat, $descr){
         // get all information from the table photo 
-        $sql = "SELECT * FROM `p1905532`.`Photo` WHERE photoId =".$photoId." AND utId = '".$utId."'" ; 
+        $sql = "SELECT * FROM `p1905532`.`Photo` WHERE photoId =".$photoId;  //AND utId = '".$utId."'" ; 
         
         $result = $conn->query($sql);
         if($result->num_rows > 0){

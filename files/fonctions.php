@@ -113,16 +113,30 @@ function getCategorieFromCatId($conn, $catId){
     }           
 }
 
-// fonction for the purpupse of debugging 
-// fonction which shows all the users 
+
+// fonction which stores all the utId in an array and returns the array 
 function utilisateur($conn){
         $sql = "SELECT utId, utMdP, utAdmin from `p1905532`.`Utilisateur`"; 
         $result = $conn->query($sql);
+        $arrayOfUtId = array();
         if($result->num_rows > 0){
             while($row = $result -> fetch_assoc()){
-                echo $row["utId"]."<br>"; // c'est le identifiant du utilisateur 
-                echo $row["utMdP"]."<br>"; // c'est le mot de passe 
-                echo $row["utAdmin"]."<br>"; // c'est un champ qui n'est pas utiliser pour le login (mais c'est pour apres)
+                array_push($arrayOfUtId, $row["utId"]); // adds value at the end of the array 
             }
         }else echo "0 results" ;    
+    return $arrayOfUtId; 
 }
+
+
+function checkIfUserIsAdmin($conn, $utId){
+    $sql = "SELECT utAdmin from `p1905532`.`Utilisateur` WHERE utId = '".$utId."'"; 
+    $result = $conn->query($sql);
+    if($result->num_rows > 0){
+        while($row = $result -> fetch_assoc()){
+            if($row["utAdmin"] == 'admin'){ 
+                return 'yes'; 
+            }else return 'no' ;
+
+        }
+    }
+} 
