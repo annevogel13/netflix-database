@@ -7,3 +7,6 @@ The goal was to create a database with SQL and to make a website which could per
 * adding a picutre with information to the database 
 * allow user login 
 * allow admin login (with acces to the restricted pages and add extra admin functions) 
+
+ The website was created with php, html and css. probably the link to the website is expired, but this was the orgininal link: 
+ 
