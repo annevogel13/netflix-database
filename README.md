@@ -9,4 +9,4 @@ The goal was to create a database with SQL and to make a website which could per
 * allow admin login (with acces to the restricted pages and add extra admin functions) 
 
  The website was created with php, html and css. probably the link to the website is expired, but this was the orgininal link: 
- 
+ https://bdw1.univ-lyon1.fr/p1905532/bdw1/files/index.php
